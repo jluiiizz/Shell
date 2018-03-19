@@ -1,0 +1,53 @@
+#include "shell.h"
+
+char *read_line()
+{
+    char *line = NULL;
+    ssize_t bufsize = 0;
+    getline(&line, &bufsize, stdin);
+    return line;
+}
+
+char **split_args(char *line)
+{
+    int bufsize = TOKEN_BUFFER_SIZE, position = 0;
+    char **tokens = malloc(bufsize * sizeof(char*));
+    char *token;
+
+    token = strtok(line, TOKEN_DELIMITERS);
+
+    while (token != NULL) {
+	tokens[position] = token;
+	position++;
+
+	if (position >= bufsize) {
+	    bufsize += TOKEN_BUFFER_SIZE;
+	    tokens = realloc(tokens, bufsize * sizeof(char*));
+	    if (!tokens) {
+		fprintf(stderr, "Allocation Error");
+		exit(EXIT_FAILURE);
+	    }
+	}
+
+	token = strtok(NULL, TOKEN_DELIMITERS);
+    }
+
+    tokens[position] = NULL;
+    return tokens;
+}
+
+void shell_loop()
+{
+    char *line;
+    char **args;
+
+    do {
+	printf(">> ");
+	line = read_line();
+	args = split_args(line);
+	printf("%s", line);
+
+	free(line);
+	free(args);
+    } while (status != 1);
+}
