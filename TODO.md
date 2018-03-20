@@ -1,6 +1,8 @@
 # Shell
 
 ## DONE
+
+- Create the **cd** command.
 - Create the **ls** command.
 - Create our initialization setup.
 - Create the **help** command.
@@ -14,8 +16,9 @@
 
 ## DOING
 
-- Create the **cd** command. (HIGH)
+- Create the **cat** command. (NORMAL)
 
 # TODO
 
+- Set virtual machine to start in our shell. (NORMAL)
 - Execute process from programs outsite the shell. (NORMAL)

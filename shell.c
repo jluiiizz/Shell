@@ -11,7 +11,8 @@ void (*commands_ptr[]) (char**) = {
     &command_exit,
     &command_clear,
     &command_help,
-    &command_ls
+    &command_ls,
+    &command_cd
 };
 
 void command_pwd(char **args)
@@ -46,12 +47,12 @@ void command_help(char **args)
 void command_ls(char **args)
 {
     char wdir[1024];
-    getcwd(wdir, sizeof(wdir));
+    getcwd(wdir, sizeof(wdir)); // Get the current working directory
 
     DIR *dir;
     struct dirent *dire;
 
-    dir = opendir("/home/vagrant");
+    dir = opendir(wdir);
 
     while ((dire=readdir(dir)) != NULL) {
 	printf("%s ", dire->d_name);
@@ -59,6 +60,17 @@ void command_ls(char **args)
     printf("\n");
 
     closedir(dir);
+}
+
+void command_cd(char **args)
+{
+    char wdir[1024];
+    getcwd(wdir, sizeof(wdir)); // Get the current working directory
+
+    strcat(wdir, "/");
+    strcat(wdir, args[1]);
+
+    chdir(wdir);
 }
 
 void shell_execute(char **args)
@@ -97,7 +109,9 @@ void shell_loop()
     getlogin_r(username, sizeof(username));
 
     do {
-	printf("%s -> ", username);
+	char wdir[1024];
+	getcwd(wdir, sizeof(wdir));
+	printf("%s @ %s-> ", username, wdir);
 	line = read_line(); // Read the given line.
 	args = split_args(line); // Split all the word in arguments.
 	shell_execute(args); // Execute the given command and their arguments.
