@@ -1,39 +1,71 @@
 #include "shell.h"
 
-char *read_line()
+int num_cmds()
 {
-    char *line = NULL;
-    ssize_t bufsize = 0;
-    getline(&line, &bufsize, stdin);
-    return line;
+    return sizeof(commands)/sizeof(char*) - 1; // The -1 removes the NULL element from the list.
 }
 
-char **split_args(char *line)
+// This pointer point to the specific command function and pass the typed arguments.
+void (*commands_ptr[]) (char**) = {
+    &command_pwd,
+    &command_exit,
+    &command_clear,
+    &command_help
+};
+
+void command_pwd(char **args)
 {
-    int bufsize = TOKEN_BUFFER_SIZE, position = 0;
-    char **tokens = malloc(bufsize * sizeof(char*));
-    char *token;
+    char path[1024];
+    getcwd(path, sizeof(path));
+    printf("Current working directory: %s\n", path);
+}
 
-    token = strtok(line, TOKEN_DELIMITERS);
+void command_exit(char **args)
+{
+    printf("EXITING ...\n");
+    status = 1;
+}
 
-    while (token != NULL) {
-	tokens[position] = token;
-	position++;
+void command_clear(char **args)
+{
+    clear();
+}
 
-	if (position >= bufsize) {
-	    bufsize += TOKEN_BUFFER_SIZE;
-	    tokens = realloc(tokens, bufsize * sizeof(char*));
-	    if (!tokens) {
-		fprintf(stderr, "Allocation Error");
-		exit(EXIT_FAILURE);
+void command_help(char **args)
+{
+    int i;
+    printf("JShell - A simple shell built with C\n");
+    printf("Avaliable commands:\n\n");
+    for (i = 0; i < num_cmds(); i++) {
+	printf("%s\n", commands[i]);
+    }
+    printf("\nThanks for using JShell. For more info please see github page -> https://github.com/jluiiizz/Shell\n");
+}
+
+void shell_execute(char **args)
+{
+    int i;
+
+    if (args[0] != NULL) { // Verify if somethings was typed
+	for (i = 0; i < num_cmds(); i++) { // Verify if typed command is equals to one of the available commands
+	    if (strcmp(args[0], (char *) commands[i]) == 0) {
+	        (*commands_ptr[i])(args);
+		break;
+	    } else if ((strcmp(args[0], (char *) commands[i]) != 0) && (check_string(args[0], commands) == 0)) { // If not, check if the typed command exist. Need this to tell the
+		printf("Command not found. Avaliable commands: ");                                               // correct message.
+		int j;
+		for (j = 0; j < num_cmds(); j++) {
+		    if (j != (num_cmds() - 1)) {
+			printf("%s, ", commands[j]);
+		    } else {
+			printf("%s. ", commands[j]);
+		    }
+		}
+		printf("\n");
+		break;
 	    }
 	}
-
-	token = strtok(NULL, TOKEN_DELIMITERS);
     }
-
-    tokens[position] = NULL;
-    return tokens;
 }
 
 void shell_loop()
@@ -45,7 +77,7 @@ void shell_loop()
 	printf(">> ");
 	line = read_line();
 	args = split_args(line);
-	printf("%s", line);
+	shell_execute(args);
 
 	free(line);
 	free(args);

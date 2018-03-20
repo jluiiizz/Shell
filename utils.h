@@ -16,4 +16,10 @@ void lowcase(char []);
 // Clear the screen
 void clear();
 
-#end
+// Count number of strings inside an array
+int count_strings(char *array_of_strings[]);
+
+// Check if a string is inside and array of strings. 0 means there isn't the specific string in this array, 1 means the inverse.
+int check_string(char * my_string, char *array_of_strings[]);
+
+#endif

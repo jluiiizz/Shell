@@ -1,1 +1,3 @@
 *.exe
+.#TODO.md
+.#shell.c

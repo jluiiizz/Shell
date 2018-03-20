@@ -24,7 +24,7 @@ char **split_args(char *line)
 	    bufsize += TOKEN_BUFFER_SIZE;
 	    tokens = realloc(tokens, bufsize * sizeof(char*));
 	    if (!tokens) {
-		fprintf(stderr, "Allocation Error");
+		fprintf(stderr, "Memory allocation error\n");
 		exit(EXIT_FAILURE);
 	    }
 	}

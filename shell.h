@@ -2,17 +2,33 @@
 #define SHELL_H
 
 #define MAX_ARGS_LENGTH 64
-#define TOKEN_BUFFER_SIZE 64
-#define TOKEN_DELIMITERS " \t\r\n\a"
 
 // Represent the actual status of the shell
 int status = 0; // 0 is running and 1 is closing
 
-// Read the line
-char *read_line();
+// Built-in commands
+char *commands[] = {
+    "pwd",
+    "exit",
+    "clear",
+    "help",
+    NULL
+};
 
-// Split the given line in the command and their arguments.
-char **split_args(char *line);
+// Verify how mane builtin commands we have and return this value
+int num_cmds();
+
+/*
+  Command functions declaration
+ */
+
+void command_pwd(char **args); // Show current directory
+void command_exit(char **args); // Exit shell
+void command_clear(char **args); // Clear the screen
+void command_help(char **args);
+
+// Execute the given command
+void shell_execute(char **args);
 
 // Initialize our basic loop.
 void shell_loop();

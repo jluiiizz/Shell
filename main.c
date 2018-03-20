@@ -11,6 +11,7 @@
 
 // Include our own libraries and files
 #include "utils.c"
+#include "input.c"
 #include "shell.c"
 
 int main(int argc, char **argv)
