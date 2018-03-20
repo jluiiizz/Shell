@@ -1,6 +1,7 @@
 # Shell
 
 ## DONE
+- Create the **ls** command.
 - Create our initialization setup.
 - Create the **help** command.
 - Create the **clear** command.
@@ -13,9 +14,8 @@
 
 ## DOING
 
-- Create the **ls** command. (HIGH)
+- Create the **cd** command. (HIGH)
 
 # TODO
 
-- Create the **cd** command. (HIGH)
 - Execute process from programs outsite the shell. (NORMAL)

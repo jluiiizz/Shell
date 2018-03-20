@@ -2,12 +2,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 
 // Including linux libraries (API)
 #include <unistd.h>
 #include <limits.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 // Include our own libraries and files
 #include "utils.c"

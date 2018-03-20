@@ -10,7 +10,8 @@ void (*commands_ptr[]) (char**) = {
     &command_pwd,
     &command_exit,
     &command_clear,
-    &command_help
+    &command_help,
+    &command_ls
 };
 
 void command_pwd(char **args)
@@ -40,6 +41,24 @@ void command_help(char **args)
 	printf("%s\n", commands[i]);
     }
     printf("\nThanks for using JShell. For more info please see github page -> https://github.com/jluiiizz/Shell\n");
+}
+
+void command_ls(char **args)
+{
+    char wdir[1024];
+    getcwd(wdir, sizeof(wdir));
+
+    DIR *dir;
+    struct dirent *dire;
+
+    dir = opendir("/home/vagrant");
+
+    while ((dire=readdir(dir)) != NULL) {
+	printf("%s ", dire->d_name);
+    }
+    printf("\n");
+
+    closedir(dir);
 }
 
 void shell_execute(char **args)
