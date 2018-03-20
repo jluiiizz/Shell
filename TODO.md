@@ -1,6 +1,7 @@
 # Shell
 
 ## DONE
+- Create our initialization setup.
 - Create the **help** command.
 - Create the **clear** command.
 - Create the **pwd** command.
@@ -12,7 +13,7 @@
 
 ## DOING
 
-- Create our initialization setup. (HIGH)
+- Create the **ls** command. (HIGH)
 
 # TODO
 

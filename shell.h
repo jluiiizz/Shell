@@ -2,6 +2,7 @@
 #define SHELL_H
 
 #define MAX_ARGS_LENGTH 64
+#define MAX_DIR_LENGTH 256
 
 // Represent the actual status of the shell
 int status = 0; // 0 is running and 1 is closing
@@ -32,5 +33,8 @@ void shell_execute(char **args);
 
 // Initialize our basic loop.
 void shell_loop();
+
+// Do some basic config, like set default working directory to /home/username
+void shell_initialize();
 
 #endif

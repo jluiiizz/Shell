@@ -73,13 +73,30 @@ void shell_loop()
     char *line;
     char **args;
 
+    // Get the username
+    char username[LOGIN_NAME_MAX];
+    getlogin_r(username, sizeof(username));
+
     do {
-	printf(">> ");
-	line = read_line();
-	args = split_args(line);
-	shell_execute(args);
+	printf("%s -> ", username);
+	line = read_line(); // Read the given line.
+	args = split_args(line); // Split all the word in arguments.
+	shell_execute(args); // Execute the given command and their arguments.
 
 	free(line);
 	free(args);
     } while (status != 1);
+}
+
+void shell_initialize()
+{
+    char hostname[HOST_NAME_MAX];
+    gethostname(hostname, sizeof(hostname)); // Get the hostname
+    char username[LOGIN_NAME_MAX];
+    getlogin_r(username, sizeof(username)); // Get the username
+
+    char dir[MAX_DIR_LENGTH]; // Default working directory
+    strcat(dir, "/home/");
+    strcat(dir, username);
+    chdir(dir);
 }

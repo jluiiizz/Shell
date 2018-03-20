@@ -16,6 +16,7 @@
 
 int main(int argc, char **argv)
 {
+    shell_initialize();
     shell_loop();
 
     return 0;
