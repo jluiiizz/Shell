@@ -16,10 +16,13 @@ void lowcase(char []);
 // Clear the screen
 void clear();
 
-// Count number of strings inside an array
+// Count number of strings inside an array. Its important to mention that the last element must be NULL for this function work
 int count_strings(char *array_of_strings[]);
 
-// Check if a string is inside and array of strings. 0 means there isn't the specific string in this array, 1 means the inverse.
+// Check if a string is inside and array of strings. 0 means there isn't the specific string in this array, 1 means the inverse
 int check_string(char * my_string, char *array_of_strings[]);
+
+// Check if the given path is a FILE or a DIR
+int is_file(char *path);
 
 #endif

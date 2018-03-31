@@ -2,7 +2,7 @@
 #define SHELL_H
 
 #define MAX_ARGS_LENGTH 64
-#define MAX_DIR_LENGTH 256
+#define MAX_DIR_LENGTH 1024
 
 // Represent the actual status of the shell
 int status = 0; // 0 is running and 1 is closing

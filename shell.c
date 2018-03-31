@@ -17,7 +17,7 @@ void (*commands_ptr[]) (char**) = {
 
 void command_pwd(char **args)
 {
-    char path[1024];
+    char path[MAX_DIR_LENGTH];
     getcwd(path, sizeof(path));
     printf("Current working directory: %s\n", path);
 }
@@ -46,31 +46,45 @@ void command_help(char **args)
 
 void command_ls(char **args)
 {
-    char wdir[1024];
+    char wdir[MAX_DIR_LENGTH];
     getcwd(wdir, sizeof(wdir)); // Get the current working directory
+    unsigned char isFile = 0x8;
+    unsigned char isDirectory = 0x4;
 
     DIR *dir;
     struct dirent *dire;
 
     dir = opendir(wdir);
 
-    while ((dire=readdir(dir)) != NULL) {
-	printf("%s ", dire->d_name);
-    }
-    printf("\n");
+    printf("\nListing directories and files:\n* before name means that is a directory. Ex: *.git (dir) test (file) \n\n");
 
+    while ((dire=readdir(dir)) != NULL) {
+	if (dire->d_type == isFile) {
+	    printf("%s ", dire->d_name);
+	} else if (dire->d_type == isDirectory) {
+	    printf("*%s ", dire->d_name);
+	} else {
+	    printf("\n\nSOME ERROR\n\n");
+	}
+    }
+
+    printf("\n\n");
     closedir(dir);
 }
 
 void command_cd(char **args)
 {
-    char wdir[1024];
-    getcwd(wdir, sizeof(wdir)); // Get the current working directory
+    if (args[1] != NULL) {
+	char wdir[MAX_DIR_LENGTH];
+	getcwd(wdir, sizeof(wdir)); // Get the current working directory
 
-    strcat(wdir, "/");
-    strcat(wdir, args[1]);
+	strcat(wdir, "/");
+	strcat(wdir, args[1]);
 
-    chdir(wdir);
+	chdir(wdir);
+    } else {
+	printf("\n\naola\n\n");
+    }
 }
 
 void shell_execute(char **args)
@@ -128,8 +142,8 @@ void shell_initialize()
     char username[LOGIN_NAME_MAX];
     getlogin_r(username, sizeof(username)); // Get the username
 
-    char dir[MAX_DIR_LENGTH]; // Default working directory
-    strcat(dir, "/home/");
-    strcat(dir, username);
-    chdir(dir);
+    char wdir[1024] = "/home/"; // Default working directory
+
+    strcat(wdir, username);
+    chdir(wdir);
 }

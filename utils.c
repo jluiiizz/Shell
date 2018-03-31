@@ -50,7 +50,7 @@ int count_strings(char *array_of_strings[])
     return count;
 }
 
-int check_string(char * my_string, char *array_of_strings[])
+int check_string(char *my_string, char *array_of_strings[])
 {
     int i;
     int num_strings = count_strings(array_of_strings);
@@ -61,4 +61,15 @@ int check_string(char * my_string, char *array_of_strings[])
 	}
     }
     return 0;
+}
+
+
+int is_file(char *path)
+{
+    struct stat buffer;
+    if (stat(path, &buffer) != 0) {
+	return 0;
+    } else {
+	return S_ISDIR(buffer.st_mode);
+    }
 }

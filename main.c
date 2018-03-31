@@ -7,8 +7,8 @@
 #include <unistd.h>
 #include <limits.h>
 #include <dirent.h>
-#include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 
 // Include our own libraries and files
 #include "utils.c"
