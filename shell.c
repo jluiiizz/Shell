@@ -12,7 +12,8 @@ void (*commands_ptr[]) (char**) = {
     &command_clear,
     &command_help,
     &command_ls,
-    &command_cd
+    &command_cd,
+    &command_mkdir
 };
 
 void command_pwd(char **args)
@@ -56,19 +57,33 @@ void command_ls(char **args)
 
     dir = opendir(wdir);
 
-    printf("\nListing directories and files:\n* before name means that is a directory. Ex: *.git (dir) test (file) \n\n");
+    if (args[1] != NULL) {
+	if (strcmp(args[1], "-l") == 0) {
+	    printf("\n");
+	    while ((dire=readdir(dir)) != NULL) {
+		if (dire->d_type == isFile) {
+		    printf("%s\n", dire->d_name);
+		} else if (dire->d_type == isDirectory) {
+		    printf(ANSI_GREEN "%s\n" ANSI_NO_COLOR, dire->d_name);
+		} else {
+		    printf("\n\nSOME ERROR\n\n");
+		}
+	    }
+	}
+    }
 
     while ((dire=readdir(dir)) != NULL) {
 	if (dire->d_type == isFile) {
 	    printf("%s ", dire->d_name);
 	} else if (dire->d_type == isDirectory) {
-	    printf("*%s ", dire->d_name);
+	    printf(ANSI_GREEN"*%s " ANSI_NO_COLOR, dire->d_name);
 	} else {
 	    printf("\n\nSOME ERROR\n\n");
 	}
     }
 
-    printf("\n\n");
+    printf("\n");
+
     closedir(dir);
 }
 
@@ -83,7 +98,22 @@ void command_cd(char **args)
 
 	chdir(wdir);
     } else {
-	printf("\n\naola\n\n");
+	printf("Por favor digite um PATH valido!");
+    }
+}
+
+void command_mkdir(char **args)
+{
+    struct stat buffer;
+    char *path = args[1];
+    if (path != NULL) {
+	if (stat(path, &buffer) == 0) {
+	    printf("Ja existe um diretorio com este nome.\n");
+	} else {
+	    mkdir(path, 0777);
+	}
+    } else {
+    	printf("E necessario um caminho VALIDO.");
     }
 }
 

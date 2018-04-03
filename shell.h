@@ -15,6 +15,7 @@ char *commands[] = {
     "help",
     "ls",
     "cd",
+    "mkdir",
     NULL
 };
 
@@ -31,6 +32,7 @@ void command_clear(char **args); // Clear the screen
 void command_help(char **args); // Show helpful information
 void command_ls(char **args); // Show all files and directorys inside the working dir
 void command_cd(char **args); // Change the working directory
+void command_mkdir(char **args); // Create a new directory
 
 // Execute the given command
 void shell_execute(char **args);
