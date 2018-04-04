@@ -51,34 +51,61 @@ void command_ls(char **args)
     getcwd(wdir, sizeof(wdir)); // Get the current working directory
     unsigned char isFile = 0x8;
     unsigned char isDirectory = 0x4;
+    char *path = wdir;
 
     DIR *dir;
     struct dirent *dire;
+    struct stat stat_buffer;
 
     dir = opendir(wdir);
 
     if (args[1] != NULL) {
-	if (strcmp(args[1], "-l") == 0) {
-	    printf("\n");
-	    while ((dire=readdir(dir)) != NULL) {
-		if (dire->d_type == isFile) {
-		    printf("%s\n", dire->d_name);
-		} else if (dire->d_type == isDirectory) {
-		    printf(ANSI_GREEN "%s\n" ANSI_NO_COLOR, dire->d_name);
-		} else {
-		    printf("\n\nSOME ERROR\n\n");
+    	if (strcmp(args[1], "-l") == 0) {
+    	    printf("\n");
+    	    while ((dire=readdir(dir)) != NULL) {
+		if (dire->d_name[0] != '.') {
+		    if (stat(dire->d_name, &stat_buffer) == 0) {
+			if (S_ISDIR(stat_buffer.st_mode) == 1) { // Means that is a directory
+			    printf(ANSI_GREEN "%s\n" ANSI_NO_COLOR, dire->d_name);
+			} else { // Means that is a regular file
+			    printf(ANSI_CYAN "%s\n" ANSI_NO_COLOR, dire->d_name);
+			}
+		    }
 		}
-	    }
+    	    }
+    	} else if (strcmp(args[1], "-a") == 0) {
+	    while ((dire=readdir(dir)) != NULL) {
+    		if (stat(dire->d_name, &stat_buffer) == 0) {
+		    if (S_ISDIR(stat_buffer.st_mode) == 1) { // Means that is a directory
+			printf(ANSI_GREEN "%s " ANSI_NO_COLOR, dire->d_name);
+		    } else { // Means that is a regular file
+			printf(ANSI_CYAN "%s " ANSI_NO_COLOR, dire->d_name);
+		    }
+		}
+    	    }
+	} else if (strcmp(args[1], "-la") == 0) {
+    	    printf("\n");
+    	    while ((dire=readdir(dir)) != NULL) {
+		if (stat(dire->d_name, &stat_buffer) == 0) {
+		    if (S_ISDIR(stat_buffer.st_mode) == 1) { // Means that is a directory
+			printf(ANSI_GREEN "%s\n" ANSI_NO_COLOR, dire->d_name);
+		    } else { // Means that is a regular file
+			printf(ANSI_CYAN "%s\n" ANSI_NO_COLOR, dire->d_name);
+		    }
+		}
+    	    }
 	}
     }
 
     while ((dire=readdir(dir)) != NULL) {
-	if (dire->d_type == isFile) {
-	    printf("%s ", dire->d_name);
-	} else if (dire->d_type == isDirectory) {
-	    printf(ANSI_GREEN"*%s " ANSI_NO_COLOR, dire->d_name);
-	} else {
-	    printf("\n\nSOME ERROR\n\n");
+	if (dire->d_name[0] != '.') {
+	    if (stat(dire->d_name, &stat_buffer) == 0) {
+		if (S_ISDIR(stat_buffer.st_mode) == 1) { // Means that is a directory
+		    printf(ANSI_GREEN "%s " ANSI_NO_COLOR, dire->d_name);
+		} else { // Means that is a regular file
+		    printf(ANSI_CYAN "%s " ANSI_NO_COLOR, dire->d_name);
+		}
+	    }
 	}
     }
 
@@ -90,6 +117,15 @@ void command_ls(char **args)
 void command_cd(char **args)
 {
     if (args[1] != NULL) {
+	// Check if the given PATH is a file
+	struct stat stat_buffer;
+	char *path = args[1];
+	if (stat(path, &stat_buffer) == 0) {
+	    if (S_ISREG(stat_buffer.st_mode) == 1) {
+		printf("Por favor digite um PATH valido!");
+	    }
+	}
+
 	char wdir[MAX_DIR_LENGTH];
 	getcwd(wdir, sizeof(wdir)); // Get the current working directory
 
@@ -155,7 +191,7 @@ void shell_loop()
     do {
 	char wdir[1024];
 	getcwd(wdir, sizeof(wdir));
-	printf("%s @ %s-> ", username, wdir);
+	printf(ANSI_LIGHT_GREEN "%s @ %s-> " ANSI_NO_COLOR, username, wdir);
 	line = read_line(); // Read the given line.
 	args = split_args(line); // Split all the word in arguments.
 	shell_execute(args); // Execute the given command and their arguments.
@@ -172,7 +208,7 @@ void shell_initialize()
     char username[LOGIN_NAME_MAX];
     getlogin_r(username, sizeof(username)); // Get the username
 
-    char wdir[1024] = "/home/"; // Default working directory
+    char wdir[MAX_DIR_LENGTH] = "/home/"; // Default working directory
 
     strcat(wdir, username);
     chdir(wdir);
