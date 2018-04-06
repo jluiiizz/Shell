@@ -4,9 +4,11 @@
 #include <string.h>
 
 // Including linux libraries (API)
+#include <errno.h>
 #include <unistd.h>
 #include <limits.h>
 #include <dirent.h>
+#include <ftw.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 

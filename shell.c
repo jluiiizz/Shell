@@ -13,7 +13,9 @@ void (*commands_ptr[]) (char**) = {
     &command_help,
     &command_ls,
     &command_cd,
-    &command_mkdir
+    &command_mkdir,
+    &command_rmdir,
+    &command_rm
 };
 
 void command_pwd(char **args)
@@ -37,6 +39,7 @@ void command_clear(char **args)
 void command_help(char **args)
 {
     int i;
+
     printf("JShell - A simple shell built with C\n");
     printf("Avaliable commands:\n\n");
     for (i = 0; i < num_cmds(); i++) {
@@ -49,8 +52,6 @@ void command_ls(char **args)
 {
     char wdir[MAX_DIR_LENGTH];
     getcwd(wdir, sizeof(wdir)); // Get the current working directory
-    unsigned char isFile = 0x8;
-    unsigned char isDirectory = 0x4;
     char *path = wdir;
 
     DIR *dir;
@@ -76,9 +77,9 @@ void command_ls(char **args)
     	} else if (strcmp(args[1], "-a") == 0) {
 	    while ((dire=readdir(dir)) != NULL) {
     		if (stat(dire->d_name, &stat_buffer) == 0) {
-		    if (S_ISDIR(stat_buffer.st_mode) == 1) { // Means that is a directory
+		    if (S_ISDIR(stat_buffer.st_mode) == 1) {
 			printf(ANSI_GREEN "%s " ANSI_NO_COLOR, dire->d_name);
-		    } else { // Means that is a regular file
+		    } else {
 			printf(ANSI_CYAN "%s " ANSI_NO_COLOR, dire->d_name);
 		    }
 		}
@@ -87,9 +88,9 @@ void command_ls(char **args)
     	    printf("\n");
     	    while ((dire=readdir(dir)) != NULL) {
 		if (stat(dire->d_name, &stat_buffer) == 0) {
-		    if (S_ISDIR(stat_buffer.st_mode) == 1) { // Means that is a directory
+		    if (S_ISDIR(stat_buffer.st_mode) == 1) {
 			printf(ANSI_GREEN "%s\n" ANSI_NO_COLOR, dire->d_name);
-		    } else { // Means that is a regular file
+		    } else {
 			printf(ANSI_CYAN "%s\n" ANSI_NO_COLOR, dire->d_name);
 		    }
 		}
@@ -100,9 +101,9 @@ void command_ls(char **args)
     while ((dire=readdir(dir)) != NULL) {
 	if (dire->d_name[0] != '.') {
 	    if (stat(dire->d_name, &stat_buffer) == 0) {
-		if (S_ISDIR(stat_buffer.st_mode) == 1) { // Means that is a directory
+		if (S_ISDIR(stat_buffer.st_mode) == 1) {
 		    printf(ANSI_GREEN "%s " ANSI_NO_COLOR, dire->d_name);
-		} else { // Means that is a regular file
+		} else {
 		    printf(ANSI_CYAN "%s " ANSI_NO_COLOR, dire->d_name);
 		}
 	    }
@@ -122,19 +123,18 @@ void command_cd(char **args)
 	char *path = args[1];
 	if (stat(path, &stat_buffer) == 0) {
 	    if (S_ISREG(stat_buffer.st_mode) == 1) {
-		printf("Por favor digite um PATH valido!");
+		printf("Please type a VALID path.");
 	    }
 	}
 
 	char wdir[MAX_DIR_LENGTH];
 	getcwd(wdir, sizeof(wdir)); // Get the current working directory
-
 	strcat(wdir, "/");
 	strcat(wdir, args[1]);
 
 	chdir(wdir);
     } else {
-	printf("Por favor digite um PATH valido!");
+	printf("Please type a VALID path.");
     }
 }
 
@@ -144,12 +144,43 @@ void command_mkdir(char **args)
     char *path = args[1];
     if (path != NULL) {
 	if (stat(path, &buffer) == 0) {
-	    printf("Ja existe um diretorio com este nome.\n");
+	    printf("Already exist a directory with this name.\n");
 	} else {
 	    mkdir(path, 0777);
 	}
     } else {
-    	printf("E necessario um caminho VALIDO.");
+    	printf("Please type a VALID path.\n");
+    }
+}
+
+void command_rmdir(char **args)
+{
+    if (args[1] != NULL) {
+	char *path = args[1];
+
+	if (rmdir(path) == -1) {
+	    printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
+	} else {
+	    rmdir(path);
+	}
+    } else {
+	printf("Please type a VALID path.\n");
+    }
+}
+
+void command_rm(char **args)
+{
+    if (args[1] != NULL) {
+	int i;
+    	if (unlink(args[1]) == -1) { // Catch errors.
+    	    printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
+    	}
+
+	for (i = 0; args[i] != NULL; i++) {
+    	    unlink(args[i]); // Remove the given files.
+	}
+    } else {
+    	printf("Please type a VALID path.\n");
     }
 }
 
@@ -163,7 +194,7 @@ void shell_execute(char **args)
 	        (*commands_ptr[i])(args);
 		break;
 	    } else if ((strcmp(args[0], (char *) commands[i]) != 0) && (check_string(args[0], commands) == 0)) { // If not, check if the typed command exist. Need this to tell the
-		printf("Command not found. Avaliable commands: ");                                               // correct message.
+		printf(ANSI_LIGHT_RED "Command not found. Avaliable commands: ");                                               // correct message.
 		int j;
 		for (j = 0; j < num_cmds(); j++) {
 		    if (j != (num_cmds() - 1)) {
@@ -203,8 +234,6 @@ void shell_loop()
 
 void shell_initialize()
 {
-    char hostname[HOST_NAME_MAX];
-    gethostname(hostname, sizeof(hostname)); // Get the hostname
     char username[LOGIN_NAME_MAX];
     getlogin_r(username, sizeof(username)); // Get the username
 

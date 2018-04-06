@@ -20,7 +20,6 @@
 #define ANSI_LIGHT_CYAN "\033[1;36m"
 #define ANSI_WHITE "\033[1;37m"
 
-
 // Convert a value in bytes to megabytes
 int convert_to_megabytes(unsigned long value_in_bytes);
 
@@ -44,5 +43,11 @@ int check_string(char * my_string, char *array_of_strings[]);
 
 // Check if the given path is a FILE or a DIR
 int is_file(char *path);
+
+// Get the current working directory
+char *get_cwdir();
+
+// Count how many arguments was passed.
+int count_arguments();
 
 #endif

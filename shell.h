@@ -16,6 +16,8 @@ char *commands[] = {
     "ls",
     "cd",
     "mkdir",
+    "rmdir",
+    "rm",
     NULL
 };
 
@@ -30,9 +32,11 @@ void command_pwd(char **args); // Show current directory
 void command_exit(char **args); // Exit shell
 void command_clear(char **args); // Clear the screen
 void command_help(char **args); // Show helpful information
-void command_ls(char **args); // Show all files and directorys inside the working dir
+void command_ls(char **args); // Show all files and directories inside the working dir
 void command_cd(char **args); // Change the working directory
 void command_mkdir(char **args); // Create a new directory
+void command_rmdir(char **args); // Remove a directory
+void command_rm(char **args); // Remove a file
 
 // Execute the given command
 void shell_execute(char **args);

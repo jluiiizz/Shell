@@ -2,25 +2,34 @@
 
 ## RECENTLY DONE
 
+- Create **rm** command.
+- Create **rmdir** command.
 - Use **stat** system call to verify if a path is a dir or a file.
 - Create the **mkdir** command.
 - Implement colors.
-- Implement the '-l' argument to **ls** command.
-- Separate files from directories while using **ls**.
+
 
 ## DOING
 
-- Create the **cat** command. (NORMAL)
+- Create the **touch** command. (NORMAL)
 
 ## TODO
 
+- Refactor **shell.c** code. (NORMAL)
+- Implement a **--force** argument to **rmdir** command, to exclude non-empty directories. (HIGH)
+- Create a little documentation. In README. (HIGH)
+- Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (HIGH)
 - Fix the backspace bug in the shell. (NORMAL)
+- Organize **ls** directories in alphabetical order. (LOW)
+- Use **ncurses** lib to better style customization. (LOW)
+- Create a config file. (LOW)
+- Create the **cat** command. (LOW)
 - Create a **Makefile** to make compile process easier. (NORMAL)
 - Execute process from programs outsite the shell. (NORMAL)
-- Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (HIGH)
 
 ## DONE
-
+- Implement the '-l' argument to **ls** command.
+- Separate files from directories while using **ls**.
 - Review all the code and refactor what is necessary.
 - Set virtual machine to start in our shell.
 - Create the **cd** command.

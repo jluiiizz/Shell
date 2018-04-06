@@ -73,3 +73,16 @@ int is_file(char *path)
 	return S_ISDIR(buffer.st_mode);
     }
 }
+
+char *get_cwdir()
+{
+    char wdir[1024];
+    getcwd(wdir, sizeof(wdir));
+    char *wdir_ptr = wdir;
+    return wdir_ptr;
+}
+
+int count_arguments()
+{
+
+}
