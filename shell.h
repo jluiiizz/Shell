@@ -18,6 +18,7 @@ char *commands[] = {
     "mkdir",
     "rmdir",
     "rm",
+    "touch",
     NULL
 };
 
@@ -37,6 +38,7 @@ void command_cd(char **args); // Change the working directory
 void command_mkdir(char **args); // Create a new directory
 void command_rmdir(char **args); // Remove a directory
 void command_rm(char **args); // Remove a file
+void command_touch(char **args); // Create a file
 
 // Execute the given command
 void shell_execute(char **args);

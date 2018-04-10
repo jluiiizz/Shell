@@ -15,7 +15,8 @@ void (*commands_ptr[]) (char**) = {
     &command_cd,
     &command_mkdir,
     &command_rmdir,
-    &command_rm
+    &command_rm,
+    &command_touch
 };
 
 void command_pwd(char **args)
@@ -123,7 +124,7 @@ void command_cd(char **args)
 	char *path = args[1];
 	if (stat(path, &stat_buffer) == 0) {
 	    if (S_ISREG(stat_buffer.st_mode) == 1) {
-		printf("Please type a VALID path.");
+		printf("Please type a VALID path.\n");
 	    }
 	}
 
@@ -134,7 +135,7 @@ void command_cd(char **args)
 
 	chdir(wdir);
     } else {
-	printf("Please type a VALID path.");
+	printf("Please type a VALID path.\n");
     }
 }
 
@@ -174,10 +175,25 @@ void command_rm(char **args)
 	int i;
     	if (unlink(args[1]) == -1) { // Catch errors.
     	    printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
-    	}
+    	} else {
+	    for (i = 0; args[i] != NULL; i++) {
+		unlink(args[i]); // Remove the given files.
+	    }
+	}
+    } else {
+    	printf("Please type a VALID path.\n");
+    }
+}
 
-	for (i = 0; args[i] != NULL; i++) {
-    	    unlink(args[i]); // Remove the given files.
+void command_touch(char **args)
+{
+    if (args[1] != NULL) {
+	char *path = args[1];
+	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+	if (creat(path, mode) == -1) {
+    	    printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
+	} else {
+	    creat(path, mode);
 	}
     } else {
     	printf("Please type a VALID path.\n");
