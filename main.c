@@ -1,9 +1,11 @@
+#define _XOPEN_SOURCE 500
 // Including C libraries
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
 // Including linux libraries (API)
+
 #include <errno.h>
 #include <unistd.h>
 #include <limits.h>

@@ -25,6 +25,8 @@ char *commands[] = {
 // Verify how mane builtin commands we have and return this value
 int num_cmds();
 
+static int remove_all(const char *path, const struct stat *stat_buffer, int tflag, struct FTW *ftwbuffer);
+
 /*
   Command functions declaration
  */

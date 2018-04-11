@@ -2,20 +2,18 @@
 
 ## RECENTLY DONE
 
+- Implement a **--force** argument to **rmdir** command, to exclude non-empty directories.
+- Refactor **shell.c** code.
 - Create the **touch** command.
 - Create **rm** command.
 - Create **rmdir** command.
-- Use **stat** system call to verify if a path is a dir or a file.
-- Create the **mkdir** command.
 
 ## DOING
 
-- Refactor **shell.c** code. (NORMAL)
+- Fix the backspace bug in the shell. (NORMAL)
 
 ## TODO
 
-- Implement a **--force** argument to **rmdir** command, to exclude non-empty directories. (HIGH)
-- Fix the backspace bug in the shell. (NORMAL)
 - Organize **ls** directories in alphabetical order. (LOW)
 - Use **ncurses** lib to better style customization. (LOW)
 - Create the **cat** command. (LOW)
@@ -27,6 +25,8 @@
 
 ## DONE
 
+- Use **stat** system call to verify if a path is a dir or a file.
+- Create the **mkdir** command.
 - Implement colors.
 - Implement the '-l' argument to **ls** command.
 - Separate files from directories while using **ls**.
