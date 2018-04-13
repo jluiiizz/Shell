@@ -2,21 +2,19 @@
 
 ## RECENTLY DONE
 
+- Create the **cat** command.
 - Implement a **--force** argument to **rmdir** command, to exclude non-empty directories.
 - Refactor **shell.c** code.
 - Create the **touch** command.
 - Create **rm** command.
-- Create **rmdir** command.
 
 ## DOING
 
-- Fix the backspace bug in the shell. (NORMAL)
+- Organize **ls** directories in alphabetical order. (LOW)
 
 ## TODO
 
-- Organize **ls** directories in alphabetical order. (LOW)
-- Use **ncurses** lib to better style customization. (LOW)
-- Create the **cat** command. (LOW)
+- Fix the backspace bug in the shell. (NORMAL)
 - Create a config file. (LOW)
 - Execute process from programs outsite the shell. (HIGH)
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
@@ -25,6 +23,8 @@
 
 ## DONE
 
+
+- Create **rmdir** command.
 - Use **stat** system call to verify if a path is a dir or a file.
 - Create the **mkdir** command.
 - Implement colors.

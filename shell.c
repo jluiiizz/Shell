@@ -24,7 +24,8 @@ void (*commands_ptr[]) (char**) = {
     &command_mkdir,
     &command_rmdir,
     &command_rm,
-    &command_touch
+    &command_touch,
+    &command_cat
 };
 
 void command_pwd(char **args)
@@ -214,6 +215,28 @@ void command_touch(char **args)
 	} else {
 	    creat(path, mode);
 	}
+    } else {
+    	printf("Please type a VALID path.\n");
+    }
+}
+
+void command_cat(char **args)
+{
+    if (args[1] != NULL) {
+    	char *path = args[1];
+    	if (is_dir(path) == 1) { // Means that is a directory
+	    printf(ANSI_LIGHT_RED "Not a file\n");
+    	} else {
+	    FILE *target;
+	    target = fopen(path, "r"); // "r" means that we are just reading
+	    int c;
+	    if (target != NULL) {
+		while ((c = getc(target)) != EOF) {
+		    putchar(c);
+		}
+		fclose(target);
+	    }
+    	}
     } else {
     	printf("Please type a VALID path.\n");
     }

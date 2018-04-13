@@ -44,10 +44,12 @@ int check_string(char * my_string, char *array_of_strings[]);
 // Check if the given path is a FILE or a DIR
 int is_file(char *path);
 
+// Verify if PATH is a dir
+int is_dir(char* path);
+
 // Get the current working directory
 char *get_cwdir();
 
-// Count how many arguments was passed.
-int count_arguments();
+
 
 #endif

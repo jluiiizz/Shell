@@ -66,11 +66,23 @@ int check_string(char *my_string, char *array_of_strings[])
 
 int is_file(char *path)
 {
-    struct stat buffer;
-    if (stat(path, &buffer) != 0) {
-	return 0;
+    struct stat stat_buffer;
+    if (stat(path, &stat_buffer) != 0) {
+	printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
+	return -1;
     } else {
-	return S_ISDIR(buffer.st_mode);
+	return S_ISREG(stat_buffer.st_mode);
+    }
+}
+
+int is_dir(char *path)
+{
+    struct stat stat_buffer;
+    if (stat(path, &stat_buffer) != 0) {
+	printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
+	return -1;
+    } else {
+	return S_ISDIR(stat_buffer.st_mode);
     }
 }
 
@@ -80,9 +92,4 @@ char *get_cwdir()
     getcwd(wdir, sizeof(wdir));
     char *wdir_ptr = wdir;
     return wdir_ptr;
-}
-
-int count_arguments()
-{
-
 }
