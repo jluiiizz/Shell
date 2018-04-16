@@ -53,7 +53,7 @@ void command_help(char **args)
 	int i;
 
 	printf(ANSI_YELLOW "JShell - A simple shell built with C\n");
-	printf(ANSI_YELLOW "Avaliable commands:\n\n");
+	printf(ANSI_YELLOW "Avaliable Built-in commands:\n\n");
 	for (i = 0; i < num_cmds(); i++) {
 	    printf("%s\n", commands[i]);
 	}
@@ -182,9 +182,9 @@ void command_rmdir(char **args)
 	    char *path = args[1];
 
 	    if (rmdir(path) == -1) {
-		printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
+	    	printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
 	    } else {
-		rmdir(path);
+	    	rmdir(path);
 	    }
 	}
     } else {
@@ -262,10 +262,11 @@ int shell_process(char **args)
     pid = fork();
     if (pid == 0) {
 	if (execvp(args[0], args) == -1) {
-	    return 0;
+	    return 0; // Failure
 	}
     } else if (pid < 0) {
-	return 0;
+	perror(ANSI_LIGHT_RED "JShell");
+	return 0; // Failure
     } else {
 	do {
 	    opid = waitpid(pid, &process_status, WUNTRACED);
@@ -283,8 +284,8 @@ void shell_execute(char **args)
 	    if (strcmp(args[0], (char *) commands[i]) == 0) {
 	        (*commands_ptr[i])(args);
 		break;
-	    } else if ((strcmp(args[0], (char *) commands[i]) != 0) && (check_string(args[0], commands) == 0)) { // If not, check if the typed command exist. Need this to tell the correct message
-		if (shell_process(args) == 1) { // Still need to figure out why this is executed without had really called this function.
+	    } else if ((check_string(args[0], commands) == 0)) { // If not, check if the typed command exist. Need this to tell the correct message
+		if (shell_process(args) == 1) {
 		    break;
 		} else {
 		    printf(ANSI_LIGHT_RED "Command not found. Avaliable commands: ");
