@@ -25,7 +25,8 @@ void (*commands_ptr[]) (char**) = {
     &command_rmdir,
     &command_rm,
     &command_touch,
-    &command_cat
+    &command_cat,
+    &command_echo
 };
 
 void command_pwd(char **args)
@@ -48,14 +49,16 @@ void command_clear(char **args)
 
 void command_help(char **args)
 {
-    int i;
+    if (args[1] == NULL) {
+	int i;
 
-    printf(ANSI_YELLOW "JShell - A simple shell built with C\n");
-    printf(ANSI_YELLOW "Avaliable commands:\n\n");
-    for (i = 0; i < num_cmds(); i++) {
-	printf("%s\n", commands[i]);
+	printf(ANSI_YELLOW "JShell - A simple shell built with C\n");
+	printf(ANSI_YELLOW "Avaliable commands:\n\n");
+	for (i = 0; i < num_cmds(); i++) {
+	    printf("%s\n", commands[i]);
+	}
+	printf(ANSI_YELLOW "\nThanks for using JShell. For more info please see github page -> https://github.com/jluiiizz/Shell\n");
     }
-    printf(ANSI_YELLOW "\nThanks for using JShell. For more info please see github page -> https://github.com/jluiiizz/Shell\n");
 }
 
 void command_ls(char **args)
@@ -242,6 +245,35 @@ void command_cat(char **args)
     }
 }
 
+void command_echo(char **args)
+{
+    int i;
+    for (i = 0; i < count_strings(args); i++) {
+	printf("%s ", args[i]);
+    }
+    printf("\n");
+}
+
+int shell_process(char **args)
+{
+    pid_t pid, opid;
+    int process_status;
+
+    pid = fork();
+    if (pid == 0) {
+	if (execvp(args[0], args) == -1) {
+	    return 0;
+	}
+    } else if (pid < 0) {
+	return 0;
+    } else {
+	do {
+	    opid = waitpid(pid, &process_status, WUNTRACED);
+	} while (!WIFEXITED(process_status) && !WIFSIGNALED(process_status));
+	return 1; // Success
+    }
+}
+
 void shell_execute(char **args)
 {
     int i;
@@ -251,18 +283,22 @@ void shell_execute(char **args)
 	    if (strcmp(args[0], (char *) commands[i]) == 0) {
 	        (*commands_ptr[i])(args);
 		break;
-	    } else if ((strcmp(args[0], (char *) commands[i]) != 0) && (check_string(args[0], commands) == 0)) { // If not, check if the typed command exist. Need this to tell the
-		printf(ANSI_LIGHT_RED "Command not found. Avaliable commands: ");                                // correct message.
-		int j;
-		for (j = 0; j < num_cmds(); j++) {
-		    if (j != (num_cmds() - 1)) {
-			printf("%s, ", commands[j]);
-		    } else {
-			printf("%s. ", commands[j]);
+	    } else if ((strcmp(args[0], (char *) commands[i]) != 0) && (check_string(args[0], commands) == 0)) { // If not, check if the typed command exist. Need this to tell the correct message
+		if (shell_process(args) == 1) { // Still need to figure out why this is executed without had really called this function.
+		    break;
+		} else {
+		    printf(ANSI_LIGHT_RED "Command not found. Avaliable commands: ");
+		    int j;
+		    for (j = 0; j < num_cmds(); j++) {
+			if (j != (num_cmds() - 1)) {
+			    printf("%s, ", commands[j]);
+			} else {
+			    printf("%s. ", commands[j]);
+			}
 		    }
+		    printf("\n");
+		    break;
 		}
-		printf("\n");
-		break;
 	    }
 	}
     }

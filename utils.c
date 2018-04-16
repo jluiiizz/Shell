@@ -57,10 +57,10 @@ int check_string(char *my_string, char *array_of_strings[])
 
     for (i = 0; i < num_strings; i++) {
 	if (strcmp(my_string, array_of_strings[i]) == 0) {
-	    return 1;
+	    return 1; // my_string is inside of array_of_strings
 	}
     }
-    return 0;
+    return 0; // my_string isn't inside of array_of_strings
 }
 
 

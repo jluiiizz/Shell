@@ -2,28 +2,31 @@
 
 ## RECENTLY DONE
 
+- Execute process from programs outsite the shell.
+- Create a simple **echo** command.
 - Create the **cat** command.
 - Implement a **--force** argument to **rmdir** command, to exclude non-empty directories.
 - Refactor **shell.c** code.
-- Create the **touch** command.
-- Create **rm** command.
 
 ## DOING
 
-- Organize **ls** directories in alphabetical order. (LOW)
+- Solve POSSIBLE bug, **shell_process** is executed without being called. (HIGH)
 
 ## TODO
 
+- Check **line 289** from **shell.c**, possible rendundance. (NORMAL)
+- Display info for each command in **help**. (NORMAL)
+- Create a little documentation. In README. (LOW)
+- Organize **ls** directories in alphabetical order. (LOW)
 - Fix the backspace bug in the shell. (NORMAL)
 - Create a config file. (LOW)
-- Execute process from programs outsite the shell. (HIGH)
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
 - Create a **Makefile** to make compile process easier. (LOW)
-- Create a little documentation. In README. (LOW)
 
 ## DONE
 
-
+- Create the **touch** command.
+- Create **rm** command.
 - Create **rmdir** command.
 - Use **stat** system call to verify if a path is a dir or a file.
 - Create the **mkdir** command.
