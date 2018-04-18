@@ -47,7 +47,7 @@ void command_cat(char **args); // Read a file and output their content
 void command_echo(char **args); // Output a given string
 
 // Execute process that aren't builtin
-int shell_process(char **args);
+void shell_process(char **args);
 
 // Execute the given command
 void shell_execute(char **args);

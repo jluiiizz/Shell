@@ -248,13 +248,13 @@ void command_cat(char **args)
 void command_echo(char **args)
 {
     int i;
-    for (i = 0; i < count_strings(args); i++) {
+    for (i = 1; i < count_strings(args); i++) {
 	printf("%s ", args[i]);
     }
     printf("\n");
 }
 
-int shell_process(char **args)
+void shell_process(char **args)
 {
     pid_t pid, opid;
     int process_status;
@@ -262,16 +262,24 @@ int shell_process(char **args)
     pid = fork();
     if (pid == 0) {
 	if (execvp(args[0], args) == -1) {
-	    return 0; // Failure
+	    printf(ANSI_LIGHT_RED "Command not found. Avaliable commands: ");
+	    int j;
+	    for (j = 0; j < num_cmds(); j++) {
+		if (j != (num_cmds() - 1)) {
+		    printf("%s, ", commands[j]);
+		} else {
+		    printf("%s. ", commands[j]);
+		}
+	    }
+	    printf("\n");
 	}
+	exit(EXIT_FAILURE);
     } else if (pid < 0) {
 	perror(ANSI_LIGHT_RED "JShell");
-	return 0; // Failure
     } else {
 	do {
 	    opid = waitpid(pid, &process_status, WUNTRACED);
 	} while (!WIFEXITED(process_status) && !WIFSIGNALED(process_status));
-	return 1; // Success
     }
 }
 
@@ -283,25 +291,10 @@ void shell_execute(char **args)
 	for (i = 0; i < num_cmds(); i++) { // Verify if typed command is equals to one of the available commands
 	    if (strcmp(args[0], (char *) commands[i]) == 0) {
 	        (*commands_ptr[i])(args);
-		break;
-	    } else if ((check_string(args[0], commands) == 0)) { // If not, check if the typed command exist. Need this to tell the correct message
-		if (shell_process(args) == 1) {
-		    break;
-		} else {
-		    printf(ANSI_LIGHT_RED "Command not found. Avaliable commands: ");
-		    int j;
-		    for (j = 0; j < num_cmds(); j++) {
-			if (j != (num_cmds() - 1)) {
-			    printf("%s, ", commands[j]);
-			} else {
-			    printf("%s. ", commands[j]);
-			}
-		    }
-		    printf("\n");
-		    break;
-		}
+		return;
 	    }
 	}
+	shell_process(args);
     }
 }
 

@@ -2,19 +2,18 @@
 
 ## RECENTLY DONE
 
+- Fix the **shell_process** bug. Stop starting new process after use an unkown command.
+- Check **line 289** from **shell.c**, possible rendundance.
 - Execute process from programs outsite the shell.
 - Create a simple **echo** command.
 - Create the **cat** command.
-- Implement a **--force** argument to **rmdir** command, to exclude non-empty directories.
-- Refactor **shell.c** code.
 
 ## DOING
 
-- Solve POSSIBLE bug, **shell_process** is executed without being called. (HIGH)
+- Create a simple LOG system. (NORMAL)
 
 ## TODO
 
-- Check **line 289** from **shell.c**, possible rendundance. (NORMAL)
 - Display info for each command in **help**. (NORMAL)
 - Create a little documentation. In README. (LOW)
 - Organize **ls** directories in alphabetical order. (LOW)
@@ -25,6 +24,8 @@
 
 ## DONE
 
+- Implement a **--force** argument to **rmdir** command, to exclude non-empty directories.
+- Refactor **shell.c** code.
 - Create the **touch** command.
 - Create **rm** command.
 - Create **rmdir** command.

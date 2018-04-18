@@ -50,6 +50,4 @@ int is_dir(char* path);
 // Get the current working directory
 char *get_cwdir();
 
-
-
 #endif
