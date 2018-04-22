@@ -212,11 +212,10 @@ void command_touch(char **args)
 {
     if (args[1] != NULL) {
 	char *path = args[1];
-	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-	if (creat(path, mode) == -1) {
+	if (creat(path, file_creation_mode) == -1) {
     	    printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
 	} else {
-	    creat(path, mode);
+	    creat(path, file_creation_mode);
 	}
     } else {
     	printf("Please type a VALID path.\n");
@@ -327,6 +326,27 @@ void shell_initialize()
 
     char wdir[MAX_DIR_LENGTH] = "/home/"; // Default working directory
 
-    strcat(wdir, username);
-    chdir(wdir);
+    strcat(wdir, username); // Concatenate Username string with start working directory string
+    chdir(wdir); // Set default working directory to /home/#{user}
+
+    strcpy(home, wdir); // Set home variable
+
+    // Generate **config** folder and files
+
+    strcpy(config_folder_path, home); // Copy home path to config_folder_path string
+    strcat(config_folder_path, "/.config"); // Concatenate the config folder name to the path
+    strcpy(config_file_path, config_folder_path); // Copy config_folder_path string to config_file_path
+    strcat(config_file_path, "/.jshrc"); // Concatenate the config file name to the path
+
+    // Verify the existence of our configuration folder and file, and create new one if not exist.
+    if (check_folder(config_folder_path) == 0) {
+	mkdir(config_folder_path, 0777);
+	if (check_file(".jshrc") == 0) {
+	    creat(config_file_path, file_creation_mode);
+	}
+    } else {
+	if (check_file(".jshrc") == 0) {
+	    creat(config_file_path, file_creation_mode);
+	}
+    }
 }

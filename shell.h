@@ -7,6 +7,14 @@
 // Represent the actual status of the shell
 int status = 0; // 0 is running and 1 is closing
 
+static mode_t file_creation_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+
+static char home[MAX_DIR_LENGTH];
+
+// Config folder path
+static char config_folder_path[MAX_DIR_LENGTH];
+static char config_file_path[MAX_DIR_LENGTH];
+
 // Built-in commands
 char *commands[] = {
     "pwd",
@@ -27,6 +35,7 @@ char *commands[] = {
 // Verify how mane builtin commands we have and return this value
 int num_cmds();
 
+// Necessary function to use NFTW function on **--force** flag on **rmdir**
 static int remove_all(const char *path, const struct stat *stat_buffer, int tflag, struct FTW *ftwbuffer);
 
 /*
@@ -55,7 +64,7 @@ void shell_execute(char **args);
 // Initialize our basic loop
 void shell_loop();
 
-// Do some basic config, like set default working directory to /home/username
+// Generate config and log storage files, do some basic config, like set default working directory to /home/username
 void shell_initialize();
 
 #endif

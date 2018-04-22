@@ -93,3 +93,23 @@ char *get_cwdir()
     char *wdir_ptr = wdir;
     return wdir_ptr;
 }
+
+int check_folder(char* path)
+{
+    struct stat stat_buffer;
+    if ((stat(path, &stat_buffer) == 0) && (S_ISDIR(stat_buffer.st_mode) == 1)) {
+	return 1; // The given folder exist
+    } else {
+	return 0; // The given folder don't exist
+    }
+}
+
+int check_file(char* path)
+{
+    struct stat stat_buffer;
+    if ((stat(path, &stat_buffer) == 0) && (S_ISREG(stat_buffer.st_mode) == 1)) {
+	return 1; // The given file exist
+    } else {
+	return 0; // The given file don't exist
+    }
+}
