@@ -2,6 +2,8 @@
 
 ## RECENTLY DONE
 
+- Create a little documentation. In README. (LOW)
+- Generate config and log storage files on first initialization.
 - Fix the **shell_process** bug. Stop starting new process after use an unkown command.
 - Check **line 289** from **shell.c**, possible rendundance.
 - Execute process from programs outsite the shell.
@@ -10,16 +12,13 @@
 
 ## DOING
 
-- Generate config and log storage files on first initialization. (HIGH)
-
+- Fix the backspace bug in the shell. (NORMAL)
 
 ## TODO
 
-- Create a simple LOG system. (NORMAL)
 - Display info for each command in **help**. (NORMAL)
-- Create a little documentation. In README. (LOW)
+- Create a simple LOG system. (NORMAL)
 - Organize **ls** directories in alphabetical order. (LOW)
-- Fix the backspace bug in the shell. (NORMAL)
 - Create a config file. (LOW)
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
 - Refactor **check_folder** and **check_file** functions.
