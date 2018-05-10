@@ -2,6 +2,7 @@
 
 ## RECENTLY DONE
 
+- Create a simple HISTORY file. (NORMAL)
 - Create a config file.
 - Change the "PS1" variable to make shell more readable.
 - Create a **user** command, that shows current user.
@@ -10,7 +11,7 @@
 
 ## DOING
 
-- Create a simple HISTORY file. (NORMAL)
+- Refactor **save_on_history** function and review all code. (HIGH)
 
 ## TODO
 
@@ -23,7 +24,7 @@
 
 ## BUGS
 
-- Backspace character not printed while reading input. (MAIN)
+- Backspace character not printed while reading input. (NORMAL)
 
 ## DONE
 

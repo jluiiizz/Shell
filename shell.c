@@ -323,6 +323,7 @@ void shell_loop()
 	printf(ANSI_LIGHT_GREEN "%s -> " ANSI_NO_COLOR, crfldr); // Compact PS1 style
 
 	line = read_line(); // Read the given line.
+	save_on_history(line); // Save line on history file
 	args = split_args(line); // Split all the word in arguments.
 	shell_execute(args); // Execute the given command and their arguments.
 
@@ -356,10 +357,6 @@ void shell_initialize()
 
     strcpy(history_file_path, config_folder_path); // Copy the config_folder_path string ot history_file_path
     strcat(history_file_path, "/.jsh_history"); // Concatenate the history file name to the path
-
-    printf("CONFIG FILE PATH: %s\n", config_file_path);
-    printf("\nLOG FILE PATH: %s\n", log_file_path);
-    printf("\nHISTORY FILE PATH: %s\n\n", history_file_path);
 
     // Verify the existence of our configuration folder and file, log file and history file. And create new one if not exist.
     if (check_folder(config_folder_path) == 0) {
