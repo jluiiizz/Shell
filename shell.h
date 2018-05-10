@@ -14,6 +14,8 @@ static char home[MAX_DIR_LENGTH];
 // Config folder path
 static char config_folder_path[MAX_DIR_LENGTH];
 static char config_file_path[MAX_DIR_LENGTH];
+static char log_file_path[MAX_DIR_LENGTH];
+static char history_file_path[MAX_DIR_LENGTH];
 
 // Built-in commands
 char *commands[] = {
@@ -29,6 +31,7 @@ char *commands[] = {
     "touch",
     "cat",
     "echo",
+    "crusr",
     NULL
 };
 
@@ -54,6 +57,7 @@ void command_rm(char **args); // Remove a file
 void command_touch(char **args); // Create a file
 void command_cat(char **args); // Read a file and output their content
 void command_echo(char **args); // Output a given string
+void command_crusr(char **args); // Print the current user
 
 // Execute process that aren't builtin
 void shell_process(char **args);

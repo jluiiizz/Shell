@@ -26,7 +26,8 @@ void (*commands_ptr[]) (char**) = {
     &command_rm,
     &command_touch,
     &command_cat,
-    &command_echo
+    &command_echo,
+    &command_crusr
 };
 
 void command_pwd(char **args)
@@ -253,6 +254,14 @@ void command_echo(char **args)
     printf("\n");
 }
 
+void command_crusr(char **args)
+{
+    char username[LOGIN_NAME_MAX];
+    getlogin_r(username, sizeof(username));
+
+    printf("Current username: %s\n", username);
+}
+
 void shell_process(char **args)
 {
     pid_t pid, opid;
@@ -307,9 +316,12 @@ void shell_loop()
     getlogin_r(username, sizeof(username));
 
     do {
-	char wdir[1024];
+	char wdir[MAX_DIR_LENGTH];
 	getcwd(wdir, sizeof(wdir));
-	printf(ANSI_LIGHT_GREEN "%s @ %s-> " ANSI_NO_COLOR, username, wdir);
+	char *crfldr = get_fldrnm(wdir);
+
+	printf(ANSI_LIGHT_GREEN "%s -> " ANSI_NO_COLOR, crfldr); // Compact PS1 style
+
 	line = read_line(); // Read the given line.
 	args = split_args(line); // Split all the word in arguments.
 	shell_execute(args); // Execute the given command and their arguments.
@@ -335,18 +347,41 @@ void shell_initialize()
 
     strcpy(config_folder_path, home); // Copy home path to config_folder_path string
     strcat(config_folder_path, "/.config"); // Concatenate the config folder name to the path
+
     strcpy(config_file_path, config_folder_path); // Copy config_folder_path string to config_file_path
     strcat(config_file_path, "/.jshrc"); // Concatenate the config file name to the path
 
-    // Verify the existence of our configuration folder and file, and create new one if not exist.
+    strcpy(log_file_path, config_folder_path); // Copy config_folder_path string to log_file_path
+    strcat(log_file_path, "/.jsh_log"); // Concatenate the log file name to the path
+
+    strcpy(history_file_path, config_folder_path); // Copy the config_folder_path string ot history_file_path
+    strcat(history_file_path, "/.jsh_history"); // Concatenate the history file name to the path
+
+    printf("CONFIG FILE PATH: %s\n", config_file_path);
+    printf("\nLOG FILE PATH: %s\n", log_file_path);
+    printf("\nHISTORY FILE PATH: %s\n\n", history_file_path);
+
+    // Verify the existence of our configuration folder and file, log file and history file. And create new one if not exist.
     if (check_folder(config_folder_path) == 0) {
 	mkdir(config_folder_path, 0777);
-	if (check_file(".jshrc") == 0) {
+	if (check_file(config_file_path) == 0) {
 	    creat(config_file_path, file_creation_mode);
 	}
+	if (check_file(log_file_path) == 0) {
+	    creat(log_file_path, file_creation_mode);
+	}
+	if (check_file(history_file_path)) {
+	    creat(history_file_path, file_creation_mode);
+	}
     } else {
-	if (check_file(".jshrc") == 0) {
+	if (check_file(config_file_path) == 0) {
 	    creat(config_file_path, file_creation_mode);
+	}
+	if (check_file(log_file_path) == 0) {
+	    creat(log_file_path, file_creation_mode);
+	}
+	if (check_file(history_file_path) == 0) {
+	    creat(history_file_path, file_creation_mode);
 	}
     }
 }

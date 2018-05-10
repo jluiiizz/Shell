@@ -50,6 +50,9 @@ int is_dir(char* path);
 // Get the current working directory
 char *get_cwdir();
 
+// Return just the current folder name
+char *get_fldrnm(char* path);
+
 // Check the existance of a folder
 int check_folder(char* path);
 

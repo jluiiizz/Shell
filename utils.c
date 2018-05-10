@@ -94,6 +94,21 @@ char *get_cwdir()
     return wdir_ptr;
 }
 
+char *get_fldrnm(char *path)
+{
+    char *token;
+    char *directory;
+    size_t length;
+
+    token = strrchr(path, '/');
+
+    length = strlen(token);
+    directory = malloc(length);
+    memcpy(directory, token+1, length);
+
+    return directory;
+}
+
 int check_folder(char* path)
 {
     struct stat stat_buffer;

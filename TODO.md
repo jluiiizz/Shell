@@ -2,30 +2,36 @@
 
 ## RECENTLY DONE
 
-- Create a little documentation. In README. (LOW)
+- Create a config file.
+- Change the "PS1" variable to make shell more readable.
+- Create a **user** command, that shows current user.
+- Create a little documentation. In README.
 - Generate config and log storage files on first initialization.
+
+## DOING
+
+- Create a simple HISTORY file. (NORMAL)
+
+## TODO
+
+- Create a simple LOG system. (NORMAL)
+- Start project the MATH mode. (EXTREMELY HIGH)
+- Evalueate simple expressions in MATH mode. (HIGH)
+- Read information from config file. (HIGH) [THINK ABOUT WHAT THIS FILE WILL CONFIG]
+- Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
+- Create a **Makefile** to make compile process easier. (LOW)
+
+## BUGS
+
+- Backspace character not printed while reading input. (MAIN)
+
+## DONE
+
 - Fix the **shell_process** bug. Stop starting new process after use an unkown command.
 - Check **line 289** from **shell.c**, possible rendundance.
 - Execute process from programs outsite the shell.
 - Create a simple **echo** command.
 - Create the **cat** command.
-
-## DOING
-
-- Fix the backspace bug in the shell. (NORMAL)
-
-## TODO
-
-- Display info for each command in **help**. (NORMAL)
-- Create a simple LOG system. (NORMAL)
-- Organize **ls** directories in alphabetical order. (LOW)
-- Create a config file. (LOW)
-- Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
-- Refactor **check_folder** and **check_file** functions.
-- Create a **Makefile** to make compile process easier. (LOW)
-
-## DONE
-
 - Implement a **--force** argument to **rmdir** command, to exclude non-empty directories.
 - Refactor **shell.c** code.
 - Create the **touch** command.
