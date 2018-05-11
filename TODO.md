@@ -2,21 +2,19 @@
 
 ## RECENTLY DONE
 
-- Create a simple HISTORY file. (NORMAL)
+- Refactor **save_on_history** function and review all code.
+- Figure out a better way to generate abosolute paths.
+- Create a simple HISTORY file.
 - Create a config file.
 - Change the "PS1" variable to make shell more readable.
-- Create a **user** command, that shows current user.
-- Create a little documentation. In README.
-- Generate config and log storage files on first initialization.
 
 ## DOING
 
-- Refactor **save_on_history** function and review all code. (HIGH)
+- Create a simple LOG system. (NORMAL)
 
 ## TODO
 
-- Figure out a better way to generate abosolute paths. (LOW)
-- Create a simple LOG system. (NORMAL)
+- Configure UpArrow key to show last command. (NORMAL)
 - Start project the MATH mode. (EXTREMELY HIGH)
 - Evalueate simple expressions in MATH mode. (HIGH)
 - Read information from config file. (HIGH) [THINK ABOUT WHAT THIS FILE WILL CONFIG]
@@ -29,6 +27,9 @@
 
 ## DONE
 
+- Create a **user** command, that shows current user.
+- Create a little documentation. In README.
+- Generate config and log storage files on first initialization.
 - Fix the **shell_process** bug. Stop starting new process after use an unkown command.
 - Check **line 289** from **shell.c**, possible rendundance.
 - Execute process from programs outsite the shell.

@@ -334,19 +334,11 @@ void shell_loop()
 
 void shell_initialize()
 {
-    char username[LOGIN_NAME_MAX];
-    getlogin_r(username, sizeof(username)); // Get the username
-
-    char wdir[MAX_DIR_LENGTH] = "/home/"; // Default working directory
-
-    strcat(wdir, username); // Concatenate Username string with start working directory string
-    chdir(wdir); // Set default working directory to /home/#{user}
-
-    strcpy(home, wdir); // Set home variable
+    chdir(get_home()); // Set default working directory to /home/#{user}
 
     // Generate **config** folder and files
 
-    strcpy(config_folder_path, home); // Copy home path to config_folder_path string
+    strcpy(config_folder_path, get_home()); // Copy home path to config_folder_path string
     strcat(config_folder_path, "/.config"); // Concatenate the config folder name to the path
 
     strcpy(config_file_path, config_folder_path); // Copy config_folder_path string to config_file_path
