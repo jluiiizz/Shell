@@ -338,17 +338,10 @@ void shell_initialize()
 
     // Generate **config** folder and files
 
-    strcpy(config_folder_path, get_home()); // Copy home path to config_folder_path string
-    strcat(config_folder_path, "/.config"); // Concatenate the config folder name to the path
-
-    strcpy(config_file_path, config_folder_path); // Copy config_folder_path string to config_file_path
-    strcat(config_file_path, "/.jshrc"); // Concatenate the config file name to the path
-
-    strcpy(log_file_path, config_folder_path); // Copy config_folder_path string to log_file_path
-    strcat(log_file_path, "/.jsh_log"); // Concatenate the log file name to the path
-
-    strcpy(history_file_path, config_folder_path); // Copy the config_folder_path string ot history_file_path
-    strcat(history_file_path, "/.jsh_history"); // Concatenate the history file name to the path
+    config_folder_path = generate_absolute_path("/.config");
+    config_file_path = generate_absolute_path("/.config/.jshrc");
+    log_file_path = generate_absolute_path("/.config/.jsh_log");
+    history_file_path = generate_absolute_path("/.config/.jsh_history");
 
     // Verify the existence of our configuration folder and file, log file and history file. And create new one if not exist.
     if (check_folder(config_folder_path) == 0) {

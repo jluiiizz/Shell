@@ -10,10 +10,10 @@ int status = 0; // 0 is running and 1 is closing
 static mode_t file_creation_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
 // Config folder path
-static char config_folder_path[MAX_DIR_LENGTH];
-static char config_file_path[MAX_DIR_LENGTH];
-static char log_file_path[MAX_DIR_LENGTH];
-static char history_file_path[MAX_DIR_LENGTH];
+static char *config_folder_path;
+static char *config_file_path;
+static char *log_file_path;
+static char *history_file_path;
 
 // Built-in commands
 char *commands[] = {
