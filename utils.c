@@ -109,6 +109,18 @@ char *get_fldrnm(char *path)
     return directory;
 }
 
+char *get_home()
+{
+    char *username = getlogin();
+    char *start_home = "/home/";
+
+    char *home = malloc(strlen(username) + strlen(start_home) + 1);
+    strcpy(home, start_home);
+    strcat(home, username);
+
+    return home;
+}
+
 int check_folder(char* path)
 {
     struct stat stat_buffer;
@@ -127,4 +139,13 @@ int check_file(char* path)
     } else {
 	return 0; // The given file don't exist
     }
+}
+
+char *generate_absolute_path(char *path)
+{
+    char *abs_path = malloc(sizeof(char) * 512);
+    strcpy(abs_path, get_home());
+    strcat(abs_path, path);
+
+    return abs_path;
 }

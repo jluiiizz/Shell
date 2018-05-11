@@ -15,6 +15,7 @@
 
 ## TODO
 
+- Figure out a better way to generate abosolute paths. (LOW)
 - Create a simple LOG system. (NORMAL)
 - Start project the MATH mode. (EXTREMELY HIGH)
 - Evalueate simple expressions in MATH mode. (HIGH)

@@ -53,10 +53,16 @@ char *get_cwdir();
 // Return just the current folder name
 char *get_fldrnm(char* path);
 
+// Return the HOME path
+char *get_home();
+
 // Check the existance of a folder
 int check_folder(char* path);
 
 // Check the existance of a file
 int check_file(char* path);
+
+// Generate absolute path. 1 means succefull an -1 means failure
+char *generate_absolute_path(char *path);
 
 #endif
