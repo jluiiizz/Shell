@@ -27,14 +27,13 @@ void (*commands_ptr[]) (char**) = {
     &command_touch,
     &command_cat,
     &command_echo,
-    &command_crusr
+    &command_crusr,
+    &command_math
 };
 
 void command_pwd(char **args)
 {
-    char path[MAX_DIR_LENGTH];
-    getcwd(path, sizeof(path));
-    printf("Current working directory: %s\n", path);
+    printf("Current working directory: %s\n", get_cwdir());
 }
 
 void command_exit(char **args)
@@ -140,8 +139,7 @@ void command_cd(char **args)
 	    }
 	}
 
-	char wdir[MAX_DIR_LENGTH];
-	getcwd(wdir, sizeof(wdir)); // Get the current working directory
+	char *wdir = get_cwdir();
 	strcat(wdir, "/");
 	strcat(wdir, args[1]);
 
@@ -262,6 +260,11 @@ void command_crusr(char **args)
     printf("Current username: %s\n", username);
 }
 
+void command_math(char **args)
+{
+    math_loop();
+}
+
 void shell_process(char **args)
 {
     pid_t pid, opid;
@@ -318,7 +321,7 @@ void shell_loop()
     do {
 	char wdir[MAX_DIR_LENGTH];
 	getcwd(wdir, sizeof(wdir));
-	char *crfldr = get_fldrnm(wdir);
+	char *crfldr = get_fldrnm(wdir); // Get just the last folder of the path name
 
 	printf(ANSI_LIGHT_GREEN "%s -> " ANSI_NO_COLOR, crfldr); // Compact PS1 style
 

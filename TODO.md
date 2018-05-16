@@ -2,31 +2,32 @@
 
 ## RECENTLY DONE
 
-- Refactor **save_on_history** function and review all code.
-- Figure out a better way to generate abosolute paths.
-- Create a simple HISTORY file.
-- Create a config file.
+- Create the input system to MATH mode.
+- Start code the MATH mode.
 - Change the "PS1" variable to make shell more readable.
+- Global refactoring.
+- Refactor **save_on_history** function and review all code.
 
 ## DOING
 
-- Create a simple LOG system. (NORMAL)
+- Evalueate simple expressions in MATH mode. (HIGH)
 
 ## TODO
 
 - Configure UpArrow key to show last command. (NORMAL)
-- Start project the MATH mode. (EXTREMELY HIGH)
-- Evalueate simple expressions in MATH mode. (HIGH)
 - Read information from config file. (HIGH) [THINK ABOUT WHAT THIS FILE WILL CONFIG]
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
 - Create a **Makefile** to make compile process easier. (LOW)
 
 ## BUGS
 
-- Backspace character not printed while reading input. (NORMAL)
+- Backspace character not printed while reading input, in ConEmu, not tested in linux. (NORMAL)
 
 ## DONE
 
+- Figure out a better way to generate abosolute paths.
+- Create a simple HISTORY file.
+- Create a config file.
 - Create a **user** command, that shows current user.
 - Create a little documentation. In README.
 - Generate config and log storage files on first initialization.

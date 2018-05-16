@@ -30,6 +30,7 @@ char *commands[] = {
     "cat",
     "echo",
     "crusr",
+    "math",
     NULL
 };
 
@@ -56,6 +57,8 @@ void command_touch(char **args); // Create a file
 void command_cat(char **args); // Read a file and output their content
 void command_echo(char **args); // Output a given string
 void command_crusr(char **args); // Print the current user
+
+void command_math(char **args); // Start the math mode
 
 // Execute process that aren't builtin
 void shell_process(char **args);

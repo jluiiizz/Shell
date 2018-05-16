@@ -16,6 +16,7 @@
 
 // Include our own libraries and files
 #include "utils.c"
+#include "mathmode.c"
 #include "history.c"
 #include "input.c"
 #include "shell.c"
