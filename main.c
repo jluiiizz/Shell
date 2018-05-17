@@ -10,8 +10,10 @@
 #include <limits.h>
 #include <dirent.h>
 #include <ftw.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/sendfile.h>
 #include <time.h>
 
 // Include our own libraries and files

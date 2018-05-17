@@ -24,6 +24,8 @@ void (*commands_ptr[]) (char**) = {
     &command_mkdir,
     &command_rmdir,
     &command_rm,
+    &command_cp,
+    &command_mv,
     &command_touch,
     &command_cat,
     &command_echo,
@@ -207,6 +209,46 @@ void command_rm(char **args)
     }
 }
 
+void command_cp(char **args)
+{
+    char *path = args[1];
+    char *new_path = args[2];
+
+    if (is_file(path) == 1) {
+    	int src, dest;
+    	src = open(path, O_RDONLY);
+    	dest = creat(new_path, file_creation_mode);
+
+    	off_t bytes = 0;
+    	struct stat stat_buffer;
+    	fstat(src, &stat_buffer);
+    	if (sendfile(dest, src, &bytes, stat_buffer.st_size) == -1) {
+    	    printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
+    	} else {
+    	    sendfile(dest, src, &bytes, stat_buffer.st_size);
+    	}
+    } else {
+    	printf(ANSI_LIGHT_RED "At least for now this command just work with files\n\n");
+	return;
+    }
+}
+
+void command_mv(char **args)
+{
+    char *old_path = args[1];
+    char *new_path = args[2];
+
+    if ((old_path != NULL) && (new_path != NULL)) {
+	if (rename(old_path, new_path) == -1) {
+    	    printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
+	} else {
+	    rename(old_path, new_path);
+	}
+    } else {
+    	printf("Please type a VALID path.\n");
+    }
+}
+
 void command_touch(char **args)
 {
     if (args[1] != NULL) {
@@ -347,6 +389,7 @@ void shell_initialize()
     history_file_path = generate_absolute_path("/.config/.jsh_history");
 
     // Verify the existence of our configuration folder and file, log file and history file. And create new one if not exist.
+
     if (check_folder(config_folder_path) == 0) {
 	mkdir(config_folder_path, 0777);
 	if (check_file(config_file_path) == 0) {

@@ -26,6 +26,8 @@ char *commands[] = {
     "mkdir",
     "rmdir",
     "rm",
+    "cp",
+    "mv",
     "touch",
     "cat",
     "echo",
@@ -53,6 +55,8 @@ void command_cd(char **args); // Change the working directory
 void command_mkdir(char **args); // Create a new directory
 void command_rmdir(char **args); // Remove a directory
 void command_rm(char **args); // Remove a file
+void command_cp(char **args); // Copy a file or a directory
+void command_mv(char **args); // Move a file or a directory
 void command_touch(char **args); // Create a file
 void command_cat(char **args); // Read a file and output their content
 void command_echo(char **args); // Output a given string

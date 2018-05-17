@@ -2,15 +2,15 @@
 
 ## RECENTLY DONE
 
+- Create **copy** (cp) command.
+- Create **move** (mv) command.
 - Create the input system to MATH mode.
 - Start code the MATH mode.
 - Change the "PS1" variable to make shell more readable.
-- Global refactoring.
-- Refactor **save_on_history** function and review all code.
 
 ## DOING
 
-- Evalueate simple expressions in MATH mode. (HIGH)
+- Evaluate simple expressions in MATH mode. (HIGH)
 
 ## TODO
 
@@ -18,13 +18,18 @@
 - Read information from config file. (HIGH) [THINK ABOUT WHAT THIS FILE WILL CONFIG]
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
 - Create a **Makefile** to make compile process easier. (LOW)
+- Create a command to clear the history (**clrhistory**). (LOW)
+- Read about permissions. (LOW)
 
 ## BUGS
 
+- MV does not work with linked folders. (NORMAL)
 - Backspace character not printed while reading input, in ConEmu, not tested in linux. (NORMAL)
 
 ## DONE
 
+- Global refactoring.
+- Refactor **save_on_history** function and review all code.
 - Figure out a better way to generate abosolute paths.
 - Create a simple HISTORY file.
 - Create a config file.

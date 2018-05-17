@@ -41,10 +41,10 @@ int count_strings(char *array_of_strings[]);
 // Check if a string is inside and array of strings. 0 means there isn't the specific string in this array, 1 means the inverse
 int check_string(char * my_string, char *array_of_strings[]);
 
-// Check if the given path is a FILE or a DIR
+// Check if the given path is a FILE. If the path is a directory it returns 0, if its a file return 1
 int is_file(char *path);
 
-// Verify if PATH is a dir
+// Verify if PATH is a dir. If the path is a directory it returns 1, if its a file return 0
 int is_dir(char* path);
 
 // Get the current working directory
