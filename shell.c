@@ -30,6 +30,7 @@ void (*commands_ptr[]) (char**) = {
     &command_cat,
     &command_echo,
     &command_crusr,
+    &command_clrhist,
     &command_math
 };
 
@@ -300,6 +301,23 @@ void command_crusr(char **args)
     getlogin_r(username, sizeof(username));
 
     printf("Current username: %s\n", username);
+}
+
+void command_clrhist(char **args)
+{
+    char confirmation;
+    printf("Are you sure that you want to clear the history ? (y/n) : ");
+    scanf("%c", &confirmation);
+    if (confirmation == 'y') {
+	unlink(history_file_path);
+	creat(history_file_path, file_creation_mode);
+	return;
+    } else if (confirmation == 'n') {
+	return;
+    } else {
+	printf(ANSI_LIGHT_RED "Invalid option.\n");
+	return ;
+    }
 }
 
 void command_math(char **args)

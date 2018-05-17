@@ -32,6 +32,7 @@ char *commands[] = {
     "cat",
     "echo",
     "crusr",
+    "clrhist",
     "math",
     NULL
 };
@@ -61,6 +62,7 @@ void command_touch(char **args); // Create a file
 void command_cat(char **args); // Read a file and output their content
 void command_echo(char **args); // Output a given string
 void command_crusr(char **args); // Print the current user
+void command_clrhist(char **args); // Clear the history file (.config/jsh_history)
 
 void command_math(char **args); // Start the math mode
 
