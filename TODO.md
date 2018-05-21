@@ -19,6 +19,7 @@
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
 - Create a **Makefile** to make compile process easier. (LOW)
 - Read about permissions. (LOW)
+- Add support for links. (LOW)
 
 ## BUGS
 

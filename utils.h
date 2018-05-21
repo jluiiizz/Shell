@@ -33,7 +33,7 @@ void uppercase(char []);
 void lowcase(char []);
 
 // Clear the screen
-void clear();
+void clear_screen();
 
 // Count number of strings inside an array. Its important to mention that the last element must be NULL for this function work
 int count_strings(char *array_of_strings[]);

@@ -47,7 +47,7 @@ void command_exit(char **args)
 
 void command_clear(char **args)
 {
-    clear();
+    clear_screen();
 }
 
 void command_help(char **args)
@@ -383,7 +383,11 @@ void shell_loop()
 	getcwd(wdir, sizeof(wdir));
 	char *crfldr = get_fldrnm(wdir); // Get just the last folder of the path name
 
-	printf(ANSI_LIGHT_GREEN "%s -> " ANSI_NO_COLOR, crfldr); // Compact PS1 style
+	if (strcmp(crfldr, getlogin()) == 0) {
+	    printf(ANSI_LIGHT_GREEN "~ -> " ANSI_NO_COLOR); // Compact PS1 style
+	} else {
+	    printf(ANSI_LIGHT_GREEN "%s -> " ANSI_NO_COLOR, crfldr); // Compact PS1 style
+	}
 
 	line = read_line(); // Read the given line.
 	save_on_history(line); // Save line on history file
