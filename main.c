@@ -16,8 +16,12 @@
 #include <sys/sendfile.h>
 #include <time.h>
 
+// Including "non-oficial" libraries
+#include <curl/curl.h>
+
 // Include our own libraries and files
 #include "utils.c"
+#include "twitch.c"
 #include "mathmode.c"
 #include "history.c"
 #include "input.c"

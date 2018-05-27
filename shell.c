@@ -31,6 +31,8 @@ void (*commands_ptr[]) (char**) = {
     &command_echo,
     &command_crusr,
     &command_clrhist,
+    &command_home,
+    &command_twitch,
     &command_math
 };
 
@@ -318,6 +320,16 @@ void command_clrhist(char **args)
 	printf(ANSI_LIGHT_RED "Invalid option.\n");
 	return ;
     }
+}
+
+void command_home(char **args)
+{
+    printf("Home: %s\n", get_home());
+}
+
+void command_twitch(char **args)
+{
+
 }
 
 void command_math(char **args)

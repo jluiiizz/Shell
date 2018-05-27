@@ -10,12 +10,13 @@
 
 ## DOING
 
-- Evaluate simple expressions in MATH mode. (HIGH)
+- Create an integration with the TWITCH API. (MISC, NORMAL)
 
 ## TODO
 
-- Configure UpArrow key to show last command. (NORMAL)
+- Evaluate simple expressions in MATH mode. (HIGH)
 - Read information from config file. (HIGH) [THINK ABOUT WHAT THIS FILE WILL CONFIG]
+- Configure UpArrow key to show last command. (NORMAL)
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
 - Create a **Makefile** to make compile process easier. (LOW)
 - Read about permissions. (LOW)
