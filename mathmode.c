@@ -38,7 +38,22 @@ char **split_inputs(char *line)
 
 void math_evaluate(char **inputs)
 {
-    printf("OK!\n");
+    int args_count = count_strings(inputs);
+    int converted_inputs[args_count];
+    int i;
+
+    for (i = 0; i < count_strings(inputs); i++) // Walks through the **inputs** array
+    {
+	if (contain_numbers_only(inputs[i]) == 0) { // Verify if the given string can be converted to a number
+	    printf(ANSI_LIGHT_RED "%s is not a number", inputs[i]);
+	} else {
+	    converted_inputs[i] = atoi(inputs[i]);
+	}
+    }
+
+    printf("\n   CONVERTED INPUT 0: %d\n\n", converted_inputs[0]);
+
+    line_break();
 }
 
 void math_loop()
@@ -51,7 +66,11 @@ void math_loop()
 
 	line = read_input();
 	inputs = split_inputs(line);
-	math_evaluate(inputs);
+	if (count_strings(inputs) > 4) { // Temporary, i wanna focus first on make things work with a less number of arguments.
+	    printf("MAX ARGUMENTS NUMBER is 4\n");
+	} else {
+	    math_evaluate(inputs);
+	}
 
 	free(line);
 	free(inputs);

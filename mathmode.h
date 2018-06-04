@@ -4,7 +4,7 @@
 #define MAX_INPUT_NUMBER 4
 
 #define INPUT_BUFFER_SIZE 64
-#define INPUT_DELIMITERS " \t\r\n\a"
+#define INPUT_DELIMITERS " \t\r\n\a+-"
 
 // Represent the actual status of the math mode
 int math_status = 0; // 0 is running and 1 is closing

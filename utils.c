@@ -149,3 +149,19 @@ char *generate_absolute_path(char *path)
 
     return abs_path;
 }
+
+void line_break()
+{
+    printf("\n");
+}
+
+int contain_numbers_only(char *string)
+{
+    int i;
+    for (i = 0; i < strlen(string); i++) {
+	if (isdigit(string[i]) != 1) {
+	    return 0;
+	}
+    }
+    return 1;
+}

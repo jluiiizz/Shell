@@ -14,7 +14,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/sendfile.h>
-#include <time.h>
 
 // Including "non-oficial" libraries
 #include <curl/curl.h>

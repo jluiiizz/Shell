@@ -14,6 +14,7 @@ static int remove_all(const char *path, const struct stat *stat_buffer, int tfla
 }
 
 // This pointer point to the specific command function and pass the typed arguments.
+
 void (*commands_ptr[]) (char**) = {
     &command_pwd,
     &command_exit,
@@ -84,9 +85,9 @@ void command_ls(char **args)
 		if (dire->d_name[0] != '.') {
 		    if (stat(dire->d_name, &stat_buffer) == 0) {
 			if (S_ISDIR(stat_buffer.st_mode) == 1) { // Means that is a directory
-			    printf(ANSI_GREEN "%s\n" ANSI_NO_COLOR, dire->d_name);
+			    printf(ANSI_GREEN "(%li) %s\n" ANSI_NO_COLOR, (long) stat_buffer.st_size, dire->d_name);
 			} else { // Means that is a regular file
-			    printf(ANSI_CYAN "%s\n" ANSI_NO_COLOR, dire->d_name);
+			    printf(ANSI_CYAN "(%li) %s\n" ANSI_NO_COLOR, (long) stat_buffer.st_size, dire->d_name);
 			}
 		    }
 		}
@@ -106,9 +107,9 @@ void command_ls(char **args)
     	    while ((dire=readdir(dir)) != NULL) {
 		if (stat(dire->d_name, &stat_buffer) == 0) {
 		    if (S_ISDIR(stat_buffer.st_mode) == 1) {
-			printf(ANSI_GREEN "%s\n" ANSI_NO_COLOR, dire->d_name);
+			printf(ANSI_GREEN "(%li) %s\n" ANSI_NO_COLOR, (long) stat_buffer.st_size, dire->d_name);
 		    } else {
-			printf(ANSI_CYAN "%s\n" ANSI_NO_COLOR, dire->d_name);
+			printf(ANSI_CYAN "(%li) %s\n" ANSI_NO_COLOR, (long) stat_buffer.st_size, dire->d_name);
 		    }
 		}
     	    }
@@ -329,7 +330,7 @@ void command_home(char **args)
 
 void command_twitch(char **args)
 {
-
+    // This command will be maid witha a python integration that is being developed.
 }
 
 void command_math(char **args)

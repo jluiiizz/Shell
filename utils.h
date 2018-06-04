@@ -65,4 +65,10 @@ int check_file(char* path);
 // Generate absolute path. 1 means succefull an -1 means failure
 char *generate_absolute_path(char *path);
 
+// Print a line break
+void line_break();
+
+// Check if a given string contain numbers only
+int contain_numbers_only(char *string);
+
 #endif
