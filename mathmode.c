@@ -36,8 +36,14 @@ char **split_inputs(char *line)
     return tokens;
 }
 
+// Maybe in the future, we need to refactor this code, changing math_evaluate from VOID to LONG LONG returning an
+// long long to variable in MATH_LOOP and creating another function just to display the result, reducing the number
+// of attribuitions to MATH_EVALUATE. BETTER CODE PRACTICE.
+
 void math_evaluate(char **inputs)
 {
+    // long long result;
+
     int args_count = count_strings(inputs);
     int converted_inputs[args_count];
     int i;
@@ -47,13 +53,13 @@ void math_evaluate(char **inputs)
 	if (contain_numbers_only(inputs[i]) == 0) { // Verify if the given string can be converted to a number
 	    printf(ANSI_LIGHT_RED "%s is not a number", inputs[i]);
 	} else {
-	    converted_inputs[i] = atoi(inputs[i]);
+	    converted_inputs[i] = atoi(inputs[i]); // Convert the string into an integer and store it in a variable for future calc
 	}
     }
 
-    printf("\n   CONVERTED INPUT 0: %d\n\n", converted_inputs[0]);
-
     line_break();
+
+    // printf("%lli", result);
 }
 
 void math_loop()
