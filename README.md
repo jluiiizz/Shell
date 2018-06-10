@@ -10,14 +10,14 @@ The main purpose of this project is learn more about the C language and test my 
 
 - Check the **TODO.md** file for see what is going to be added.
 
-## Download and instalation
+## Download and installation
 
 At least for now i don't want to provide this project for general use. It's in very recent form, missing a lot of features that other shell have.
 
 - But if you still want to test it you can clone the repository and use **GCC** to compile it.
 
 ```
-gcc main.c -o jshell.exe
+make build
 ```
 
 - If you tested it, feel free to report bugs on issues and contribute to the project.
