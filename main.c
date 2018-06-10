@@ -1,4 +1,5 @@
 #define _XOPEN_SOURCE 500
+#define _GNU_SOURCE
 // Including C libraries
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,6 +15,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/sendfile.h>
+#include <sys/wait.h>
+#include <ctype.h>
 
 // Including "non-oficial" libraries
 #include <curl/curl.h>
