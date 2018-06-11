@@ -1,14 +1,10 @@
-HEADERS = shell.h utils.h input.h history.h mathmode.h twitch.h
+SRC=src/main.c
+BIN=bin/jshell
 
-default: build
+default: $(BIN)
 
-program.o: main.c $(HEADERS)
-	gcc -c main.c -o main.o
-
-build: main.o
-	gcc main.o -o jshell
+$(BIN): $(SRC)
+	gcc $? -o $(BIN)
 
 clean:
-	-rm -f main.o
-	-rm -f jshell
-	-rm -f vgcore.*
+	-rm -f $(BIN)
