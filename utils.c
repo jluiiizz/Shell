@@ -111,13 +111,7 @@ char *get_fldrnm(char *path)
 
 char *get_home()
 {
-    char *username = getlogin();
-    char *start_home = "/home/";
-
-    char *home = malloc(strlen(username) + strlen(start_home) + 1);
-    strcpy(home, start_home);
-    strcat(home, username);
-
+    char *home = getenv("HOME");
     return home;
 }
 
@@ -164,4 +158,12 @@ int contain_numbers_only(char *string)
 	}
     }
     return 1;
+}
+
+char *get_username()
+{
+    uid_t uid = getuid();
+    struct passwd *pw = getpwuid(uid);
+
+    return pw->pw_name;
 }

@@ -11,3 +11,4 @@ build: main.o
 clean:
 	-rm -f main.o
 	-rm -f jshell
+	-rm -f vgcore.*

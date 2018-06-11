@@ -175,9 +175,6 @@ void command_rmdir(char **args)
     if (args[1] != NULL) {
 	if (strcmp(args[1], "--force") == 0) {
 	    char *path = args[2];
-	    struct stat *sbuf;
-	    int tflags;
-	    struct FTW *ftwb;
 	    if (nftw(path, remove_all, 10, FTW_DEPTH | FTW_MOUNT | FTW_PHYS) == -1) {
 		printf(ANSI_LIGHT_RED "Error: %s\n", strerror(errno));
 	    } else {
@@ -300,10 +297,15 @@ void command_echo(char **args)
 
 void command_crusr(char **args)
 {
-    char username[LOGIN_NAME_MAX];
-    getlogin_r(username, sizeof(username));
+    uid_t uid = getuid();
+    struct passwd *pw = getpwuid(uid);
 
-    printf("Current username: %s\n", username);
+    if (pw == NULL) {
+	printf("Error");
+	return;
+    } else {
+	printf("%s", pw->pw_name);
+    }
 }
 
 void command_clrhist(char **args)
@@ -387,16 +389,14 @@ void shell_loop()
     char *line;
     char **args;
 
-    // Get the username
-    char username[LOGIN_NAME_MAX];
-    getlogin_r(username, sizeof(username));
+    char *username = get_username();
 
     do {
 	char wdir[MAX_DIR_LENGTH];
 	getcwd(wdir, sizeof(wdir));
 	char *crfldr = get_fldrnm(wdir); // Get just the last folder of the path name
 
-	if (strcmp(crfldr, getlogin()) == 0) {
+	if (strcmp(crfldr, username) == 0) {
 	    printf(ANSI_LIGHT_GREEN "~ -> " ANSI_NO_COLOR); // Compact PS1 style
 	} else {
 	    printf(ANSI_LIGHT_GREEN "%s -> " ANSI_NO_COLOR, crfldr); // Compact PS1 style

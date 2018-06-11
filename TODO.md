@@ -2,11 +2,11 @@
 
 ## RECENTLY DONE
 
+- Not running on GCC 8 on Linux.
+- Create a **Makefile** to make compile process easier.
 - Show files and folders size in nibbles on **ls** command.
 - Create a command to clear the history (**clrhistory**).
 - Create **copy** (cp) command.
-- Create **move** (mv) command.
-- Create the input system to MATH mode.
 
 ## DOING
 
@@ -14,11 +14,11 @@
 
 ## TODO
 
+- Separate input, output and processing from **shell.c**. (HIGH)
 - Create an integration with the TWITCH API. (MISC, NORMAL)
 - Read information from config file. (HIGH) [THINK ABOUT WHAT THIS FILE WILL CONFIG]
 - Configure UpArrow key to show last command. (NORMAL)
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
-- Create a **Makefile** to make compile process easier. (LOW)
 - Read about permissions. (LOW)
 - Add support for links. (LOW)
 
@@ -29,6 +29,8 @@
 
 ## DONE
 
+- Create **move** (mv) command.
+- Create the input system to MATH mode.
 - Start code the MATH mode.
 - Change the "PS1" variable to make shell more readable.
 - Global refactoring.

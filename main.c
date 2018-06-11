@@ -11,6 +11,7 @@
 #include <limits.h>
 #include <dirent.h>
 #include <ftw.h>
+#include <pwd.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>

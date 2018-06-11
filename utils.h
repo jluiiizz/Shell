@@ -71,4 +71,7 @@ void line_break();
 // Check if a given string contain numbers only
 int contain_numbers_only(char *string);
 
+// Return the current username
+char *get_username();
+
 #endif
