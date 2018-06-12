@@ -342,7 +342,8 @@ void command_math(char **args)
 
 void shell_process(char **args)
 {
-    pid_t pid, opid;
+    pid_t pid;
+    pid_t opid __attribute__((unused));
     int process_status;
 
     pid = fork();

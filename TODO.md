@@ -1,4 +1,4 @@
-# Shell
+# shell
 
 ## RECENTLY DONE
 
@@ -14,6 +14,8 @@
 
 ## TODO
 
+- Improve Makefile linking. (LOW)
+- Improve organization and separate source files, include files and lib. files. (NORMAL)
 - Separate input, output and processing from **shell.c**. (HIGH)
 - Create an integration with the TWITCH API. (MISC, NORMAL)
 - Read information from config file. (HIGH) [THINK ABOUT WHAT THIS FILE WILL CONFIG]
@@ -25,7 +27,6 @@
 ## BUGS
 
 - MV does not work with linked folders. (NORMAL)
-- Backspace character not printed while reading input, in ConEmu, not tested in linux. (NORMAL)
 
 ## DONE
 

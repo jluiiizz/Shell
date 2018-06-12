@@ -3,7 +3,7 @@
 char *read_input()
 {
     char *line = NULL;
-    ssize_t bufsize = 0;
+    size_t bufsize = 0;
     getline(&line, &bufsize, stdin);
     return line;
 }
@@ -45,7 +45,7 @@ void math_evaluate(char **inputs)
     // long long result;
 
     int args_count = count_strings(inputs);
-    int converted_inputs[args_count];
+    int converted_inputs[args_count] __attribute__((unused));
     int i;
 
     for (i = 0; i < count_strings(inputs); i++) // Walks through the **inputs** array
