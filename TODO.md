@@ -2,11 +2,11 @@
 
 ## RECENTLY DONE
 
+- BUG: **isdigit** just accepting *unsigned chars* in GCC 8. (SOLVED) [Was just a logic problem]
 - Not running on GCC 8 on Linux.
 - Create a **Makefile** to make compile process easier.
 - Show files and folders size in nibbles on **ls** command.
 - Create a command to clear the history (**clrhistory**).
-- Create **copy** (cp) command.
 
 ## DOING
 
@@ -14,14 +14,15 @@
 
 ## TODO
 
-- Improve Makefile linking. (LOW)
-- Improve organization and separate source files, include files and lib. files. (NORMAL)
 - Separate input, output and processing from **shell.c**. (HIGH)
+- Use automated tests. (HIGH)
+- Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (HIGH)
+- Improve organization and separate source files, include files and lib. files. (NORMAL)
+- Improve Makefile linking. (LOW)
 - Create an integration with the TWITCH API. (MISC, NORMAL)
 - Read information from config file. (HIGH) [THINK ABOUT WHAT THIS FILE WILL CONFIG]
 - Configure UpArrow key to show last command. (NORMAL)
-- Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (NORMAL)
-- Read about permissions. (LOW)
+- Add support for permissions.
 - Add support for links. (LOW)
 
 ## BUGS
@@ -30,6 +31,7 @@
 
 ## DONE
 
+- Create **copy** (cp) command.
 - Create **move** (mv) command.
 - Create the input system to MATH mode.
 - Start code the MATH mode.

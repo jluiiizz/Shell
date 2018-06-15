@@ -153,7 +153,7 @@ int contain_numbers_only(char *string)
 {
     int i;
     for (i = 0; i < strlen(string); i++) {
-	if (isdigit(string[i]) != 1) {
+	if (isdigit(string[i]) == 0) {
 	    return 0;
 	}
     }

@@ -36,7 +36,7 @@ char **split_inputs(char *line)
     return tokens;
 }
 
-// Maybe in the future, we need to refactor this code, changing math_evaluate from VOID to LONG LONG returning an
+// Maybe in the future, we need to refactor this code, changing **math__evaluate** from VOID to LONG LONG returning an
 // long long to variable in MATH_LOOP and creating another function just to display the result, reducing the number
 // of attribuitions to MATH_EVALUATE. BETTER CODE PRACTICE.
 
@@ -45,10 +45,10 @@ void math_evaluate(char **inputs)
     // long long result;
 
     int args_count = count_strings(inputs);
-    int converted_inputs[args_count] __attribute__((unused));
+    int converted_inputs[args_count] __attribute__((unused)); // NOTE: Need to figure out why GCC thinks this is unused.
     int i;
 
-    for (i = 0; i < count_strings(inputs); i++) // Walks through the **inputs** array
+    for (i = 0; i < args_count; i++) // Walks through the **inputs** array
     {
 	if (contain_numbers_only(inputs[i]) == 0) { // Verify if the given string can be converted to a number
 	    printf(ANSI_LIGHT_RED "%s is not a number", inputs[i]);
@@ -57,7 +57,7 @@ void math_evaluate(char **inputs)
 	}
     }
 
-    line_break();
+   line_break();
 
     // printf("%lli", result);
 }
@@ -72,7 +72,7 @@ void math_loop()
 
 	line = read_input();
 	inputs = split_inputs(line);
-	if (count_strings(inputs) > 4) { // Temporary, i wanna focus first on make things work with a less number of arguments.
+	if (count_strings(inputs) > 4) { // *Temporary, i wanna focus first on make things work with a less number of arguments.
 	    printf("MAX ARGUMENTS NUMBER is 4\n");
 	} else {
 	    math_evaluate(inputs);
