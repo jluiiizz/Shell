@@ -1,3 +1,5 @@
 *.exe
 .#TODO.md
 .#shell.c
+TAGS
+jshell
