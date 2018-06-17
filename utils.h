@@ -74,4 +74,7 @@ int contain_numbers_only(char *string);
 // Return the current username
 char *get_username();
 
+// Check if the given number is odd or not. 0 means false and 1 means true
+int check_parity(int value);
+
 #endif

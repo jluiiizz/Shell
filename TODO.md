@@ -14,8 +14,8 @@
 
 ## TODO
 
-- Separate input, output and processing from **shell.c**. (HIGH)
 - Use automated tests. (HIGH)
+- Separate input, output and processing from **shell.c**. (HIGH)
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (HIGH)
 - Improve organization and separate source files, include files and lib. files. (NORMAL)
 - Improve Makefile linking. (LOW)

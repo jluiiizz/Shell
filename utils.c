@@ -167,3 +167,15 @@ char *get_username()
 
     return pw->pw_name;
 }
+
+int check_parity(int value)
+{
+    if (value == 0) {
+	return 0;
+    } else if (value == 1) {
+	return 0;
+    } else if ((value % 2) == 0) {
+	return 1;
+    }
+    return 0;
+}
