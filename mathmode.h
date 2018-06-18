@@ -9,8 +9,8 @@
 #define MAX_OPERATIONS 3 // Quantity of operations
 #define MAX_VALUES 4
 
-// char *operation[5]; // 0 means ADD, 1 means SUBTRACT
-
+// char *operation[5]; //  means ADD, 2 means SUBTRACT
+static int input_count;
 
 // Represent the actual status of the math mode
 int math_status = 0; // 0 is running and 1 is closing
@@ -22,7 +22,7 @@ char *read_inputs();
 char **split_inputs(char *line);
 
 // Evaluate the given expression
-void math_evaluate(int operations[], int values[]);
+long long math_evaluate(char operations[], int values[]);
 
 // Initialize our basic loop in MATH mode
 void math_loop();
