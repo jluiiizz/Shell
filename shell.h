@@ -34,7 +34,6 @@ char *commands[] = {
     "crusr",
     "clrhist",
     "home",
-    "twitch",
     "math",
     NULL
 };
@@ -66,7 +65,6 @@ void command_echo(char **args); // Output a given string
 void command_crusr(char **args); // Print the current user
 void command_clrhist(char **args); // Clear the history file (.config/jsh_history)
 void command_home(char **args); // Print the home path
-void command_twitch(char **args); // Show information about a twitch profile
 
 void command_math(char **args); // Start the math mode
 

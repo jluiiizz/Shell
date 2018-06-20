@@ -39,9 +39,9 @@ char **split_inputs(char *line)
 // Maybe in the future, we need to refactor this code, changing **math__evaluate** from VOID to LONG LONG returning an
 // long long to variable in MATH_LOOP and creating another function just to display the result, reducing the number
 // of attribuitions to MATH_EVALUATE. BETTER CODE PRACTICE.
-long long math_evaluate(char operations[], int values[])
+long double math_evaluate(char operations[], double values[])
 {
-    long long result = 0;
+    long double result = 0;
     int i;
 
     for (i = 0; i < input_count; i++) {
@@ -60,7 +60,7 @@ long long math_evaluate(char operations[], int values[])
 	    	result = (result / values[i + 1]);
 	    } else if (operations[i] == '%') {
 	    	result += values[i - 1];
-	    	result = (result % values[i + 1]);
+	    	result = ((int) result % (int) values[i + 1]);
 	    }
 	}
     }
@@ -74,7 +74,7 @@ void math_loop()
     char **inputs;
 
     char math_operations[MAX_OPERATIONS];
-    int math_numbers[MAX_VALUES]; // Given values
+    double math_numbers[MAX_VALUES];
 
     static int input_integrity = 1; // 1 is OK, 0 is an error
 
@@ -84,7 +84,7 @@ void math_loop()
 	line = read_input();
 	inputs = split_inputs(line);
 
-	long long result;
+	long double result;
 	int i;
 	input_count = count_strings(inputs);
 
@@ -93,7 +93,7 @@ void math_loop()
 	} else {
 	    for (i = 0; i < input_count; i++) {
 		if (contain_numbers_only(inputs[i]) == 1) {
-		    math_numbers[i] = atoi(inputs[i]);
+		    math_numbers[i] = atof(inputs[i]);
 		} else {
 		    if (inputs[i][0] == '+') {
 			math_operations[i] = '+';
@@ -111,7 +111,7 @@ void math_loop()
 
 	    if (input_integrity == 1){
 		result = math_evaluate(math_operations, math_numbers);
-		printf("%lli\n", result);
+		printf("%.2Lf\n", result);
 	    } else {
 		printf(ANSI_LIGHT_RED "Some error occurred.");
 	    }

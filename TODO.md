@@ -29,6 +29,7 @@
 
 ## BUGS
 
+- Show less decimal cases as result. Make this based on the size of the numbers (NORMAL)
 - MV does not work with linked folders. (NORMAL)
 
 ## DONE

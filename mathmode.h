@@ -25,7 +25,7 @@ char *read_inputs();
 char **split_inputs(char *line);
 
 // Evaluate the given expression
-long long math_evaluate(char operations[], int values[]);
+long double math_evaluate(char operations[], double values[]);
 
 // Initialize our basic loop in MATH mode
 void math_loop();

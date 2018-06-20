@@ -33,7 +33,6 @@ void (*commands_ptr[]) (char**) = {
     &command_crusr,
     &command_clrhist,
     &command_home,
-    &command_twitch,
     &command_math
 };
 
@@ -328,11 +327,6 @@ void command_clrhist(char **args)
 void command_home(char **args)
 {
     printf("Home: %s\n", get_home());
-}
-
-void command_twitch(char **args)
-{
-    // This command will be maid witha a python integration that is being developed.
 }
 
 void command_math(char **args)
