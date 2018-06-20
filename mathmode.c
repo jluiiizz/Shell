@@ -52,6 +52,15 @@ long long math_evaluate(char operations[], int values[])
 	    } else if (operations[i] == '-') {
 		result += values[i - 1];
 		result -= values[i + 1];
+	    } else if (operations[i] == '*') {
+	    	result += values[i - 1];
+	    	result *= values[i + 1];
+	    } else if (operations[i] == '/') {
+	    	result += values[i - 1];
+	    	result = (result / values[i + 1]);
+	    } else if (operations[i] == '%') {
+	    	result += values[i - 1];
+	    	result = (result % values[i + 1]);
 	    }
 	}
     }
@@ -65,8 +74,9 @@ void math_loop()
     char **inputs;
 
     char math_operations[MAX_OPERATIONS];
-    memset(math_operations, 0, sizeof(MAX_OPERATIONS));
     int math_numbers[MAX_VALUES]; // Given values
+
+    static int input_integrity = 1; // 1 is OK, 0 is an error
 
     do {
 	printf(ANSI_LIGHT_CYAN " >> ");
@@ -86,18 +96,27 @@ void math_loop()
 		    math_numbers[i] = atoi(inputs[i]);
 		} else {
 		    if (inputs[i][0] == '+') {
-			math_operations[i] = '+'; // Add
+			math_operations[i] = '+';
 		    } else if (inputs[i][0] == '-') {
-			math_operations[i] = '-'; // Add
-		    } else {
-			printf(ANSI_LIGHT_RED "Error: operation not allowed");
+			math_operations[i] = '-';
+		    } else if (inputs[i][0] == '*') {
+			math_operations[i] = '*';
+		    } else if (inputs[i][0] == '/') {
+			math_operations[i] = '/';
+		    } else if (inputs[i][0] == '%') {
+			math_operations[i] = '%';
 		    }
 		}
 	    }
-	    result = math_evaluate(math_operations, math_numbers);
-	}
 
-	printf("%lli", result);
+	    if (input_integrity == 1){
+		result = math_evaluate(math_operations, math_numbers);
+		printf("%lli\n", result);
+	    } else {
+		printf(ANSI_LIGHT_RED "Some error occurred.");
+	    }
+
+	}
 
 	free(line);
 	free(inputs);

@@ -2,18 +2,20 @@
 
 ## RECENTLY DONE
 
-- BUG: **isdigit** just accepting *unsigned chars* in GCC 8. (SOLVED) [Was just a logic problem]
-- Not running on GCC 8 on Linux.
-- Create a **Makefile** to make compile process easier.
-- Show files and folders size in nibbles on **ls** command.
-- Create a command to clear the history (**clrhistory**).
+- Add the **rest** operation.
+- Add division operation.
+- Add multiplying operation.
+- Refactored **math_evaluate**.
+- Evaluate simple expressions in MATH mode.
 
 ## DOING
 
-- Evaluate simple expressions in MATH mode. (HIGH)
+- Add support to **fload** and **double** numbers. (VERY HIGH)
 
 ## TODO
 
+- Add support to **()**. (VERY HIGH)
+- Add support to functions, like **pow, sqrt, integrate, differatiate**. (VERY HIGH)
 - Use automated tests. (HIGH)
 - Separate input, output and processing from **shell.c**. (HIGH)
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (HIGH)
@@ -31,6 +33,11 @@
 
 ## DONE
 
+- [BUG] **isdigit** just accepting *unsigned chars* in GCC 8. (SOLVED) [Was just a logic problem] (SOLVED)
+- [BUG] Not running on GCC 8 on Linux.(SOLVED)
+- Create a **Makefile** to make compile process easier.
+- Show files and folders size in nibbles on **ls** command.
+- Create a command to clear the history (**clrhistory**).
 - Create **copy** (cp) command.
 - Create **move** (mv) command.
 - Create the input system to MATH mode.
