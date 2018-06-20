@@ -69,7 +69,7 @@ void command_help(char **args)
 void command_ls(char **args)
 {
     char wdir[MAX_DIR_LENGTH];
-    getcwd(wdir, sizeof(wdir)); // Get the current working directory
+    getcwd(wdir, sizeof(wdir));
 
     DIR *dir;
     struct dirent *dire;

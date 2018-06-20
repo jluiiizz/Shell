@@ -2,15 +2,15 @@
 
 ## RECENTLY DONE
 
+- Add support to **fload** and **double** numbers.
 - Add the **rest** operation.
 - Add division operation.
 - Add multiplying operation.
 - Refactored **math_evaluate**.
-- Evaluate simple expressions in MATH mode.
 
 ## DOING
 
-- Add support to **fload** and **double** numbers. (VERY HIGH)
+
 
 ## TODO
 
@@ -21,10 +21,10 @@
 - Create a better form to handle arguments in commands. In **ls** for example, "-l" "-la". (HIGH)
 - Improve organization and separate source files, include files and lib. files. (NORMAL)
 - Improve Makefile linking. (LOW)
-- Create an integration with the TWITCH API. (MISC, NORMAL)
 - Read information from config file. (HIGH) [THINK ABOUT WHAT THIS FILE WILL CONFIG]
 - Configure UpArrow key to show last command. (NORMAL)
-- Add support for permissions.
+- Add a built-in event system. (NORMAL)
+- Add support for permissions for our built-in commands. (LOW)
 - Add support for links. (LOW)
 
 ## BUGS
@@ -34,6 +34,7 @@
 
 ## DONE
 
+- Evaluate simple expressions in MATH mode.
 - [BUG] **isdigit** just accepting *unsigned chars* in GCC 8. (SOLVED) [Was just a logic problem] (SOLVED)
 - [BUG] Not running on GCC 8 on Linux.(SOLVED)
 - Create a **Makefile** to make compile process easier.
